@@ -25,6 +25,7 @@ import java.util.Random;
 public class CustomerController {
     @Autowired
     private TestDao dao;
+
     @RequestMapping(value = "customer.do", method = RequestMethod.GET)
     public ModelAndView index() {
         System.out.printf("customer index");
@@ -57,7 +58,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "customerinfo.do", method = RequestMethod.GET)
-    public ModelAndView customerinfo(@RequestParam(value = "number") String number) {
+    public ModelAndView customerinfo(@RequestParam(value = "number", defaultValue = "") String number) {
         System.out.printf("customer index");
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customer");
