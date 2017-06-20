@@ -6,7 +6,7 @@
 %>
 <head>
     <meta charset="utf-8">
-    <title>牧场管理系统</title>
+    <title>中粮集团衡水分公司牧场管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">

@@ -50,7 +50,7 @@
 
             <div class="top-nav nav-collapse">
                 <ul class="nav">
-                    <li><a href="http://www.zhaopin.com">衡水地区</a></li>
+                    <li><a href="#">中粮集团衡水分公司</a></li>
                     <li>
                         <form class="navbar-search pull-left">
                             <input placeholder="Search" class="search-query span2" name="query" type="text">

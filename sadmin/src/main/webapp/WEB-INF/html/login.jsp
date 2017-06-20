@@ -58,25 +58,21 @@
 
     <!-- The fav icon -->
     <link rel="shortcut icon" href="img/favicon.ico">
-
 </head>
-
 <body>
-
-
     <div class="container-fluid">
         <div class="row-fluid">
 
             <div class="row-fluid">
                 <div class="span12 center login-header">
-                    <h2>Welcome to HENGSHUI Monitor System</h2>
+                    <h2>欢迎登陆中粮集团衡水分公司管理系统</h2>
                 </div><!--/span-->
             </div><!--/row-->
 
             <div class="row-fluid">
                 <div class="well span5 center login-box">
                     <div class="alert alert-info">
-                        Please login with your Username and Password.
+                        Please login with your Username and Password
                     </div>
                     <form class="form-horizontal" action="index.do" method="post">
                         <fieldset>
@@ -179,7 +175,5 @@
     <script src="<%=basePath %>js/jquery.history.js"></script>
     <!-- application script for Charisma demo -->
     <script src="<%=basePath %>js/charisma.js"></script>
-
-
 </body>
 </html>
