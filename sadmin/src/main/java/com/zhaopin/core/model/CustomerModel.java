@@ -8,6 +8,7 @@ public class CustomerModel {
     private String name;
     private String city;
     private String phone;
+    //规模
     private int scale;
     private String address;
     private String userName;
