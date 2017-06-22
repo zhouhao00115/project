@@ -1,6 +1,5 @@
 package com.zhaopin.core.controller;
 
-import com.google.gson.Gson;
 import com.zhaopin.core.dto.CustomerDto;
 import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.model.CustomerModel;
@@ -17,9 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Administrator on 2017/6/18.
