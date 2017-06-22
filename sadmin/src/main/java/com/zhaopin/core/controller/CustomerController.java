@@ -67,7 +67,6 @@ public class CustomerController {
 
     @RequestMapping(value = "customerinfo.do", method = RequestMethod.GET)
     public ModelAndView customerinfo(@RequestParam(value = "number", defaultValue = "") String number) {
-        System.out.printf("customer index");
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customer");
         mv.addObject("number", 2);
@@ -94,14 +93,6 @@ public class CustomerController {
 //        model.setPriceFreight(0);
 //        model.setRemark("备注");
 //        mv.addObject("dto", model);
-        return mv;
-    }
-
-    @RequestMapping(value = "test.do", method = RequestMethod.GET)
-    public ModelAndView test() {
-        System.out.printf("customer index");
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("maptest");
         return mv;
     }
 
