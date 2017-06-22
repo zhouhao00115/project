@@ -15,7 +15,9 @@
 --create table staff(staffid int primary key,sname varchar(50),sphone varchar(20),gender int,remarks varchar(200));
 --insert into staff(staffid,sname,sphone,gender,remarks) values (1,'王五','13712345678','1','备注');
 --order：订单表
---考虑一下再定
+--drop table orders;
+--create table orders(oid int primary key ,cid varchar(50) ,tid int ,staffid int,volume int,price double,total int,createtime varchar(50),remarks varchar(200));
+--insert into orders (oid,cid,tid,staffid,volume,price,total,createtime,remarks) values (1,'HS001',1,1,10,21.5,215,'2017-06-22 21:06:05','');
 --user:用户登陆信息表
 --drop table user;
 --create table user(id int primary key,username varchar(50),password varchar(50),power int);
@@ -29,7 +31,7 @@
 --staff：工作人员表
 --staffid：id主键唯一表示，sname姓名，sphone：电话，gender：性别  1为男 2为女，remarks：备注
 --order：订单表
---考虑一下再定
+--oid:订单id，cid：牧场id，tid:货车id,staffid：数据员id,volume：发货量（吨），price：单价（元），total：总价（元），createtime：创建时间，remarks：备注
 --user:用户登陆信息表
 --id:登陆用户id，username：用户名，password：密码，power：权限 1、超级管理员，2、普通管理员，3、只读权限
 
