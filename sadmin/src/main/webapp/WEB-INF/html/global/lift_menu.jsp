@@ -7,9 +7,15 @@
         <ul class="nav nav-tabs nav-stacked main-menu">
             <li class="nav-header hidden-tablet ">Main</li>
             <li><a class="ajax-link" href="customer.do"><i class="icon-user"></i><span
-                    class="hidden-tablet"> 客户信息</span></a></li>
+                    class="hidden-tablet"> 牧场管理</span></a></li>
+            <li><a class="ajax-link" href="customer.do"><i class="icon-user"></i><span
+                    class="hidden-tablet"> 货车管理</span></a></li>
+            <li><a class="ajax-link" href="customer.do"><i class="icon-user"></i><span
+                    class="hidden-tablet"> 数据员管理</span></a></li>
+            <li><a class="ajax-link" href="customer.do"><i class="icon-user"></i><span
+                    class="hidden-tablet"> 货运订单</span></a></li>
             <li><a class="ajax-link" href="muchang.do"><i class="icon-book"></i><span
-                    class="hidden-tablet"> 货量信息</span></a></li>
+                    class="hidden-tablet"> 权限管理</span></a></li>
         </ul>
     </div>
     <!--/.well -->

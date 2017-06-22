@@ -27,22 +27,17 @@
         <tbody>
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
             <tr>
-                <td class="center" id="id${i.index}">${customer.id}</td>
+                <td class="center" id="id${i.index}">${customer.cid}</td>
                 <td class="center" id="name${i.index}">
-                    <a href="customerinfo.do?number=${customer.id}" class="btn btn-small"
+                    <a href="customerinfo.do?number=${customer.cid}" class="btn btn-small"
                        data-dismiss="modal">${customer.name}</a>
                 </td>
                 <td class="center" id="city${i.index}">${customer.city}</td>
-                <td class="center" id="phone${i.index}">${customer.phone}</td>
-                <td class="center" id="scale${i.index}">
-                    <c:if test="${'0' eq customer.scale}">未知</c:if>
-                    <c:if test="${'1' eq customer.scale}">小型</c:if>
-                    <c:if test="${'2' eq customer.scale}">中型</c:if>
-                    <c:if test="${'3' eq customer.scale}">大型</c:if>
-                </td>
-                <td class="center" id="dataUser${i.index}">${customer.dataUser}</td>
-                <td class="center" id="dataUserPhone${i.index}">${customer.dataUserPhone}</td>
-                <td class="center" id="remark${i.index}">${customer.remark}</td>
+                <td class="center" id="phone${i.index}">${customer.cphone}</td>
+                <td class="center" id="scale${i.index}">${customer.scale}</td>
+                <td class="center" id="dataUser${i.index}"></td>
+                <td class="center" id="dataUserPhone${i.index}"></td>
+                <td class="center" id="remark${i.index}">${customer.remarks}</td>
             </tr>
         </c:forEach>
         </tbody>
@@ -74,7 +69,7 @@
         });
         var valus = [];
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
-            var position = "${customer.position}";
+            var position = "${customer.longitude}"+","+"${customer.latitude}";
             marker = new AMap.Marker({
                 icon: icon,
                 position: position.split(","),

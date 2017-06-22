@@ -46,8 +46,7 @@
                     </div>
 
                     <div class="box-content" id="customerlist">
-                        <c:if test="${'1' eq number}"><jsp:include page="customer/customerlist.jsp"></jsp:include></c:if>
-                        <c:if test="${'2' eq number}"><jsp:include page="customer/customerinfo.jsp"></jsp:include></c:if>
+                        <jsp:include page="customer/customerlist.jsp"></jsp:include>
                     </div>
                 </div>
             </div>

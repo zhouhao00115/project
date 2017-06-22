@@ -1,8 +1,6 @@
 package com.zhaopin.core.controller;
 
-import com.zhaopin.core.service.TestService;
 import com.zhaopin.core.util.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +17,6 @@ import java.util.Map;
  */
 @Controller
 public class IndexController {
-
-    @Autowired
-    private TestService testService;
 
     @RequestMapping(value = "login.do")
     public void login() {

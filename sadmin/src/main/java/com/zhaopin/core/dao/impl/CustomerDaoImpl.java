@@ -2,6 +2,7 @@ package com.zhaopin.core.dao.impl;
 
 import com.zhaopin.core.dao.CustomerDao;
 import com.zhaopin.core.dbutil.DBFactory;
+import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.mapper.CustomerMapper;
 import com.zhaopin.core.model.CustomerModel;
 import org.apache.ibatis.session.SqlSession;
@@ -18,12 +19,12 @@ public class CustomerDaoImpl implements CustomerDao {
     private SqlSessionFactory sqlSessionFactory = DBFactory.getSqlSessionFactory();
 
     @Override
-    public List<CustomerModel> query() {
+    public List<CustomerModel> query(CustomerView view) {
         SqlSession session = sqlSessionFactory.openSession();
         List<CustomerModel> customerModels = null;
         try {
             CustomerMapper mapper = session.getMapper(CustomerMapper.class);
-            customerModels = mapper.query();
+            customerModels = mapper.query(view);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
