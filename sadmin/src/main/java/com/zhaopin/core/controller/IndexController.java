@@ -1,6 +1,9 @@
 package com.zhaopin.core.controller;
 
+import com.zhaopin.core.model.AdminModel;
+import com.zhaopin.core.service.AdminService;
 import com.zhaopin.core.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +20,8 @@ import java.util.Map;
  */
 @Controller
 public class IndexController {
+    @Autowired
+    private AdminService service;
 
     @RequestMapping(value = "login.do")
     public void login() {
@@ -30,7 +35,7 @@ public class IndexController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        if (!StringUtil.idNullOrEmpty(username)) {
+        if (!StringUtil.isNullOrEmpty(username)) {
             return "index";
         }
         return "login";
@@ -41,8 +46,19 @@ public class IndexController {
                         @RequestParam(value = "password") String password) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        if ("admin".equals(username) && "admin".equals(password)) {
+        //验证登陆信息
+        if (StringUtil.isNullOrEmpty(username) || StringUtil.isNullOrEmpty(password)) {
+            request.setAttribute("error", "用户名或密码不能为空！");
+            return "login";
+        }
+        AdminModel adminModel = service.loginByName(username);
+        if (null == adminModel) {
+            request.setAttribute("error", "用户名不存在！");
+            return "login";
+        }
+        if (adminModel.getUsername().equals(username) && adminModel.getPassword().equals(password)) {
             session.setAttribute("username", username);
+            session.setAttribute("power", String.valueOf(adminModel.getPower()));
             return "index";
         }
         request.setAttribute("error", "用户名或密码输入错误！");

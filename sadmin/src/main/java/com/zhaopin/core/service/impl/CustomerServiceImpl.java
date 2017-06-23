@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerModel getModelById(CustomerView view) {
-        if (StringUtil.idNullOrEmpty(view.getCustonerId())) {
+        if (StringUtil.isNullOrEmpty(view.getCustonerId())) {
             return new CustomerModel();
         }
         return dao.getCustomerById(view.getCustonerId());
