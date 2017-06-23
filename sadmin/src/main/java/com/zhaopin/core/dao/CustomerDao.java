@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface CustomerDao {
     public List<CustomerModel> query(CustomerView view);
+
+    public CustomerModel getCustomerById(String customerId);
 }

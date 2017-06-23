@@ -6,7 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <div class="table-responsive">
-    <table class="table">
+    <table class="table table-condensed">
         <thead>
         <tr>
             <th colspan="8">
@@ -50,8 +50,13 @@
         <li><a href="#">下一页</a></li>
         <li><a href="#">尾页</a></li>
     </ul>
+    <p class="text-right">
+        <ul class="pagination pagination-sm">
+            <li></li>
+        </ul>
+    </p>
 </div>
-<div id="container" style="width:1000px; height:500px"></div>
+<div id="container" style="width:99%; height:500px"></div>
 <script src="http://webapi.amap.com/maps?v=1.3&key=20e6306ee01f0079e61babcb9e660bed&callback=init "></script>
 <script>
     function init() {
@@ -69,13 +74,13 @@
         });
         var valus = [];
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
-            var position = "${customer.longitude}"+","+"${customer.latitude}";
-            marker = new AMap.Marker({
-                icon: icon,
-                position: position.split(","),
-                offset: new AMap.Pixel(-12, -12),
-                title: 'test'
-            });
+        var position = "${customer.longitude}" + "," + "${customer.latitude}";
+        marker = new AMap.Marker({
+            icon: icon,
+            position: position.split(","),
+            offset: new AMap.Pixel(-12, -12),
+            title: 'test'
+        });
         marker.setMap(map);
         </c:forEach>
     }

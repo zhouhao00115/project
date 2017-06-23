@@ -29,36 +29,42 @@ public class CustomerController {
 
     @RequestMapping(value = "customer.do", method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response,
-                              @RequestParam(value = "rows", defaultValue = "10") String rows,
+                              @RequestParam(value = "start", defaultValue = "0") String numberstart,
+                              @RequestParam(value = "rows", defaultValue = "10") String numberrows,
                               @CookieValue(value = "cookierows", defaultValue = "10") String cookierows) {
-        int number;
+        int start;
+        int rows;
         try {
-            number = Integer.parseInt(rows);
+            start = Integer.parseInt(numberstart);
+            rows = Integer.parseInt(numberrows);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.printf("输入的行数不为整数，报错");
-            number = 10;
+            start = 0;
+            rows = 10;
         }
         if (request.getParameterMap().containsKey("rows")) {
-            Cookie cookie = new Cookie("cookierows", String.valueOf(number));
+            Cookie cookie = new Cookie("cookierows", String.valueOf(rows));
             cookie.setPath("/customer.do");
             cookie.setMaxAge(30 * 60 * 60 * 15);// 设置为半个月
             response.addCookie(cookie);
         } else {
             try {
-                number = Integer.parseInt(cookierows);
+                rows = Integer.parseInt(cookierows);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customer");
-        List<CustomerModel> list = service.getList(new CustomerView(0, number));
+        List<CustomerModel> list = service.getList(new CustomerView(start, rows));
         CustomerDto dto = new CustomerDto();
         dto.setCount(list.size());
         dto.setList(list);
         dto.setPage(1);
         mv.addObject("dto", dto);
+        //标记返回的页面为列表页
+        mv.addObject("view", 1);
         return mv;
     }
 
@@ -66,30 +72,10 @@ public class CustomerController {
     public ModelAndView customerinfo(@RequestParam(value = "number", defaultValue = "") String number) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customer");
-        mv.addObject("number", 2);
-        if (StringUtil.idNullOrEmpty(number)) {
-            return mv;
-        }
-        CustomerModel model = new CustomerModel();
-//        model.setId(number);
-//        model.setCity("衡水市");
-//        model.setName("张三牧场");
-//        model.setPhone("13500000001");
-//        model.setDataUser("李四");
-//        model.setDataUserPhone("1360001111");
-//        Random random = new Random();
-//        model.setScale(random.nextInt(4));
-//        model.setAddress("衡水市XX市XX乡XX村");
-//        model.setUserName("张三");
-//        model.setSendAddress("衡水市XX市XX乡XX村");
-//        model.setUsed(10);
-//        model.setSave("");
-//        model.setSurplus(130);
-//        model.setRoad("全程高速");
-//        model.setFreight(30);
-//        model.setPriceFreight(0);
-//        model.setRemark("备注");
-//        mv.addObject("dto", model);
+        //标记返回的页面为列表页
+        mv.addObject("view", 2);
+        CustomerModel model = service.getModelById(new CustomerView(number));
+        mv.addObject("dto",model);
         return mv;
     }
 

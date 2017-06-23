@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface CustomerService {
     public List<CustomerModel> getList(CustomerView view);
+
+    public CustomerModel getModelById(CustomerView view);
 }

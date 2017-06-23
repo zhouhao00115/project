@@ -14,4 +14,7 @@ import java.util.List;
 public interface CustomerMapper {
     @SelectProvider(method = "getQuerySql", type = CustomerProvider.class)
     List<CustomerModel> query(CustomerView view);
+
+    @Select("select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, remarks from customer where cid=#{customerId} order by cid desc limit 0,1")
+    CustomerModel getCustomerById(String customerId);
 }

@@ -6,10 +6,15 @@ package com.zhaopin.core.dto.customer;
 public class CustomerView {
     private int start;
     private int rows;
+    private String custonerId;
 
-    public CustomerView(int start,int rows){
+    public CustomerView(int start, int rows) {
         this.start = start;
         this.rows = rows;
+    }
+
+    public CustomerView(String custonerId) {
+        this.custonerId = custonerId;
     }
 
     public int getStart() {
@@ -26,5 +31,13 @@ public class CustomerView {
 
     public void setRows(int rows) {
         this.rows = rows;
+    }
+
+    public String getCustonerId() {
+        return custonerId;
+    }
+
+    public void setCustonerId(String custonerId) {
+        this.custonerId = custonerId;
     }
 }

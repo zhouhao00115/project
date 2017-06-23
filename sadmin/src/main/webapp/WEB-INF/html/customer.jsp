@@ -46,7 +46,12 @@
                     </div>
 
                     <div class="box-content" id="customerlist">
-                        <jsp:include page="customer/customerlist.jsp"></jsp:include>
+                        <c:if test="${'1' eq view}">
+                            <jsp:include page="customer/customerlist.jsp"></jsp:include>
+                        </c:if>
+                        <c:if test="${'2' eq view}">
+                            <jsp:include page="customer/customerinfo.jsp"></jsp:include>
+                        </c:if>
                     </div>
                 </div>
             </div>

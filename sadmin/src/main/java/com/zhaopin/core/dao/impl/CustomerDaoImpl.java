@@ -32,4 +32,19 @@ public class CustomerDaoImpl implements CustomerDao {
         }
         return customerModels;
     }
+
+    @Override
+    public CustomerModel getCustomerById(String customerId) {
+        SqlSession session = sqlSessionFactory.openSession();
+        CustomerModel customerModel = null;
+        try {
+            CustomerMapper mapper = session.getMapper(CustomerMapper.class);
+            customerModel = mapper.getCustomerById(customerId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return customerModel;
+    }
 }
