@@ -8,7 +8,8 @@ import com.zhaopin.core.dto.customer.CustomerView;
 public class CustomerProvider {
     public String getQuerySql(CustomerView view) {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, remarks from customer");
+        buffer.append("select * " +
+                "from customer as t1,(select staffid,sname,sphone from staff) as t2 where t1.staffid=t2.staffid");
         if (view.getRows() < 1 || view.getRows() > 100) {
             view.setRows(10);
         }

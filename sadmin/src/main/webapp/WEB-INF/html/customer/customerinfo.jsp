@@ -82,7 +82,7 @@
             <td></td>
         </tr>
         <tr>
-            <td class="center">库存剩余</td>
+            <td class="center">库存剩余(吨)</td>
             <td class="center" id="left">${dto.left}</td>
             <td></td>
             <td></td>
@@ -101,13 +101,13 @@
         </tr>
         <tr>
             <td class="center">数据员</td>
-            <td class="center" id="data"></td>
+            <td class="center" id="data">${dto.sname}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td class="center">数据源联系方式</td>
-            <td class="center" id="dataphone"></td>
+            <td class="center" id="dataphone">${dto.sphone}</td>
             <td></td>
             <td></td>
         </tr>

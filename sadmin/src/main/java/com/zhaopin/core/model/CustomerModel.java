@@ -20,6 +20,10 @@ public class CustomerModel {
     private double latitude;
     private String remarks;
 
+    private int staffid;
+    private String sname;
+    private String sphone;
+
     public String getCid() {
         return cid;
     }
@@ -138,6 +142,30 @@ public class CustomerModel {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public int getStaffid() {
+        return staffid;
+    }
+
+    public void setStaffid(int staffid) {
+        this.staffid = staffid;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getSphone() {
+        return sphone;
+    }
+
+    public void setSphone(String sphone) {
+        this.sphone = sphone;
     }
 
     //    private String id;

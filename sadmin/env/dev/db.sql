@@ -2,9 +2,9 @@
 --drop table customer;
 --create table customer(cid int primary key,name varchar(100),city varchar (20),address varchar(100),
 --cname varchar(20),cphone varchar(20),naicity varchar(20),naiaddress varchar(100),
---scale varchar(20),used int,left int ,road varchar(20),longitude double,latitude double,remarks varchar(200));
---insert into customer(cid,name,city,address,cname ,cphone,naicity,naiaddress,scale,used,left ,road,longitude,latitude,remarks) values ('HS001','测试牧场','河北石家庄市','河北省衡水市某村','张三','13512345678','河北省衡水市','河北省衡水市某村',
---'20头高产奶牛10头猪',10,12,'高速',115.703188,37.764869,'备注');
+--scale varchar(20),used int,left int ,road varchar(20),longitude double,latitude double,staffid int,remarks varchar(200));
+--insert into customer(cid,name,city,address,cname ,cphone,naicity,naiaddress,scale,used,left ,road,longitude,latitude,staffid,remarks) values ('HS001','测试牧场','河北石家庄市','河北省衡水市某村','张三','13512345678','河北省衡水市','河北省衡水市某村',
+--'20头高产奶牛10头猪',10,12,'高速',115.703188,37.764869,1,'备注');
 --select * from customer;
 --货车表
 --drop table truck;
@@ -35,3 +35,5 @@
 --user:用户登陆信息表
 --id:登陆用户id，username：用户名，password：密码，power：权限 1、超级管理员，2、普通管理员，3、只读权限
 
+select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, t1.staffid ,remarks  from customer as t1,
+(select * from staff) as t2 where t1.staffid=t2.staffid order by cid desc limit 1 offset 0;

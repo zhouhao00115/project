@@ -15,6 +15,7 @@ public interface CustomerMapper {
     @SelectProvider(method = "getQuerySql", type = CustomerProvider.class)
     List<CustomerModel> query(CustomerView view);
 
-    @Select("select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, remarks from customer where cid=#{customerId} order by cid desc limit 0,1")
+    @Select("select * from customer as t1,(select staffid,sname,sphone from staff) as t2 where t1.cid=#{customerId} " +
+            "AND t1.staffid=t2.staffid order by cid desc limit 0,1")
     CustomerModel getCustomerById(String customerId);
 }

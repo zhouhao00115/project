@@ -6,7 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <div class="table-responsive">
-    <table class="table table-condensed">
+    <table class="table">
         <thead>
         <tr>
             <th colspan="8">
@@ -35,8 +35,8 @@
                 <td class="center" id="city${i.index}">${customer.city}</td>
                 <td class="center" id="phone${i.index}">${customer.cphone}</td>
                 <td class="center" id="scale${i.index}">${customer.scale}</td>
-                <td class="center" id="dataUser${i.index}"></td>
-                <td class="center" id="dataUserPhone${i.index}"></td>
+                <td class="center" id="dataUser${i.index}">${customer.sname}</td>
+                <td class="center" id="dataUserPhone${i.index}">${customer.sphone}</td>
                 <td class="center" id="remark${i.index}">${customer.remarks}</td>
             </tr>
         </c:forEach>
