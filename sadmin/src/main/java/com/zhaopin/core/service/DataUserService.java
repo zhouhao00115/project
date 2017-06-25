@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface DataUserService {
     public List<DataUserModel> query(DataUserView view);
+    public DataUserModel getDataUserById(String staffid);
     public List<DataUserModel> allUser();
     public int count();
 }

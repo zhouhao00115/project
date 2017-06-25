@@ -4,6 +4,7 @@ import com.zhaopin.core.dao.DataUserDao;
 import com.zhaopin.core.dto.datauser.DataUserView;
 import com.zhaopin.core.model.DataUserModel;
 import com.zhaopin.core.service.DataUserService;
+import com.zhaopin.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,21 @@ public class DataUserServiceImpl implements DataUserService {
     @Override
     public List<DataUserModel> query(DataUserView view) {
         return dao.query(view);
+    }
+
+    @Override
+    public DataUserModel getDataUserById(String staffid) {
+        if (StringUtil.isNullOrEmpty(staffid)) {
+            return new DataUserModel();
+        }
+        int number = 0;
+        try {
+            number = Integer.parseInt(staffid);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new DataUserModel();
+        }
+        return dao.getDataUserById(number);
     }
 
     @Override

@@ -20,4 +20,7 @@ public interface DataUserMapper {
 
     @Select("select count(*) from staff")
     int count();
+
+    @Select("select staffid,sname,sphone,gender,remarks from staff where staffid=#{staffid} order by staffid desc limit 1 offset 0")
+    DataUserModel getUserById(int staffid);
 }

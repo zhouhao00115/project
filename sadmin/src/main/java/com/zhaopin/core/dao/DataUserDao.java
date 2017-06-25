@@ -12,4 +12,5 @@ public interface DataUserDao {
     public List<DataUserModel> query(DataUserView view);
     public List<DataUserModel> allUser();
     public int count();
+    public DataUserModel getDataUserById(int staffid);
 }

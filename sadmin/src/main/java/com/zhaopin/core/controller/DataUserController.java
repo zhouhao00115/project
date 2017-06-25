@@ -1,7 +1,9 @@
 package com.zhaopin.core.controller;
 
 import com.zhaopin.core.dto.DataUserDto;
+import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.dto.datauser.DataUserView;
+import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.model.DataUserModel;
 import com.zhaopin.core.service.DataUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,11 @@ import java.util.List;
  * Created by Administrator on 2017/6/25.
  */
 @Controller
-@RequestMapping("datauser")
 public class DataUserController {
     @Autowired
     private DataUserService dataUserService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "datauser.do",method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response,
                               @RequestParam(value = "start", defaultValue = "0") String numberstart,
                               @RequestParam(value = "rows", defaultValue = "10") String numberrows,
@@ -64,6 +65,16 @@ public class DataUserController {
         dataUserDto.setCount(dataUserService.count());
         mv.addObject("dto",dataUserDto);
         mv.addObject("view", 1);
+        return mv;
+    }
+
+    @RequestMapping(value = "datauseradd.do", method = RequestMethod.GET)
+    public ModelAndView datauserinfo(@RequestParam(value = "staffid", defaultValue = "0") String staffid) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("datauser");
+        //标记返回的页面为列表页
+        mv.addObject("dto", dataUserService.getDataUserById(staffid));
+        mv.addObject("view", 2);
         return mv;
     }
 }

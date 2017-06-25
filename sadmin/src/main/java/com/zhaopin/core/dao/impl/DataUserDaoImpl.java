@@ -62,4 +62,19 @@ public class DataUserDaoImpl implements DataUserDao {
         }
         return number;
     }
+
+    @Override
+    public DataUserModel getDataUserById(int staffid) {
+        SqlSession session = sqlSessionFactory.openSession();
+        DataUserModel  model = null;
+        try {
+            DataUserMapper mapper = session.getMapper(DataUserMapper.class);
+            model = mapper.getUserById(staffid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return model;
+    }
 }

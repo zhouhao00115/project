@@ -15,22 +15,22 @@
             <th colspan="3">
                 <h6>每页显示
                     <small>
-                        <a href="userdata.do?rows=10">10</a>
+                        <a href="datauser.do?rows=10">10</a>
                     </small>
                     <small>
-                        <a href="userdata.do?rows=30">30</a>
+                        <a href="datauser.do?rows=30">30</a>
                     </small>
                     <small>
-                        <a href="userdata.do?rows=50">50</a>
+                        <a href="datauser.do?rows=50">50</a>
                     </small>
                     <small>
-                        <a href="userdata.do?rows=100">100</a>
+                        <a href="datauser.do?rows=100">100</a>
                     </small>
                     条
                 </h6>
             </th>
             <th colspan="1">
-                <li class="btn"><a href="userdataadd.do">新增数据员</a></li>
+                <li class="btn"><a href="datauseradd.do">新增数据员</a></li>
             </th>
         </tr>
         <tr>
@@ -50,7 +50,10 @@
                     ${data.sname}
                 </td>
                 <td class="center" id="sphone${i.index}">${data.sphone}</td>
-                <td class="center" id="gender${i.index}">${data.gender}</td>
+                <td class="center" id="gender${i.index}">
+                    <c:if test="${'1' eq data.gender}">男</c:if>
+                    <c:if test="${'2' eq data.gender}">女</c:if>
+                </td>
                 <td class="center" id="remarks${i.index}">${data.remarks}</td>
                 <td class="center"><h5><small><a href="customerinfo.do?number=${data.staffid}">修改</a></small></h5></td>
             </tr>
