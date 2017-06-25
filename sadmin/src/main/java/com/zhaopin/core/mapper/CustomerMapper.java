@@ -3,9 +3,7 @@ package com.zhaopin.core.mapper;
 import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.mapper.provider.CustomerProvider;
 import com.zhaopin.core.model.CustomerModel;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -30,4 +28,12 @@ public interface CustomerMapper {
 
     @Select("select count(*) from customer")
     int count();
+
+    @Delete("delete from customer where cid=#{cid}")
+    int deleteById(String cid);
+
+    @Update("update customer set name=#{name},city=#{city},address=#{address},cname=#{cname} ,cphone=#{cphone}," +
+            "naicity=#{naicity},naiaddress=#{naiaddress},scale=#{scale},used=#{used},left=#{left},road=#{road}," +
+            "price=#{price},longitude=#{longitude},latitude=#{latitude},staffid=#{staffid},remarks=#{remarks} where cid=#{cid}")
+    int updateCustomer(CustomerModel model);
 }

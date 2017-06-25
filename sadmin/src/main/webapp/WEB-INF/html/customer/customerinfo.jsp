@@ -13,10 +13,10 @@
                 <li class="btn"><a href="customer.do">返回</a></li>
             </th>
             <th>
-                <li class="btn" data-toggle="modal" data-target="#change"><a href="customeradd.do">修改牧场信息</a></li>
+                <a href="customeradd.do?cid=${dto.cid}">修改牧场信息</a>
             </th>
             <th>
-                <li class="btn"><a href="customeradd.do">添加牧场信息</a></li>
+                <li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>
             </th>
         </tr>
         </thead>
@@ -147,3 +147,53 @@
     </div>
     <!-- /.modal -->
 </div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="deletecustomer" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="deletecustomer">
+                    删除确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                <h5>编号为
+                    <small>${dto.cid}</small>
+                </h5>
+                </br>
+                <h5>牧场简称
+                    <small>${dto.name}</small>
+                </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button id="deletebutton" name="deletebutton" type="button" class="btn btn-primary">
+                    确认删除
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<script>
+    $("deletebutton").click(function () {
+        alert("删除");
+        $.ajax({
+            type: 'post', //post方式
+            async: false, //是否异步，默认为true
+            url: "deletecustomer.do", //发送的接收地址。
+            data: { "cid":${dto.cid} }, //参数
+            error: function (xhr) {
+                alert("删除失败");
+            },
+            success: function (str) { //如果成功，返回一个结果，在这里处理
+                alert(str);
+            },
+            dataType: "text" //返回结果的类型。
+        });
+    });
+</script>

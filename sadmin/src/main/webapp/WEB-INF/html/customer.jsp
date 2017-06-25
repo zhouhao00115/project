@@ -27,7 +27,7 @@
                         <a href="index.do"> 首页 </a> <span class="divider">/</span>
                     </li>
                     <li>
-                        <a href="customer.do"> 客户信息 </a>
+                        <a href="customer.do"> 牧场管理</a>
                     </li>
                 </ul>
             </div>

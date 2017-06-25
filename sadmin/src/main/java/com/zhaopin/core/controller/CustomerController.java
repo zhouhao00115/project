@@ -4,18 +4,19 @@ import com.zhaopin.core.dto.CustomerDto;
 import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.service.CustomerService;
+import com.zhaopin.core.service.DataUserService;
 import com.zhaopin.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,6 +27,8 @@ public class CustomerController {
 
     @Autowired
     private CustomerService service;
+    @Autowired
+    private DataUserService dataUserService;
 
     @RequestMapping(value = "customer.do", method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response,
@@ -59,7 +62,7 @@ public class CustomerController {
         mv.setViewName("customer");
         List<CustomerModel> list = service.getList(new CustomerView(start, rows));
         CustomerDto dto = new CustomerDto();
-        dto.setCount(list.size());
+        dto.setCount(service.getCountCustomer());
         dto.setList(list);
         dto.setPage(1);
         mv.addObject("dto", dto);
@@ -80,17 +83,24 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "customeradd.do", method = RequestMethod.GET)
-    public ModelAndView customeradd() {
+    public ModelAndView customeradd(@RequestParam(value = "cid", defaultValue = "") String cid) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customer");
         //标记返回的页面为列表页
         mv.addObject("view", 3);
-        mv.addObject("dto", new CustomerModel());
+        mv.addObject("datauser", dataUserService.allUser());
+        if (StringUtil.isNullOrEmpty(cid)) {
+            mv.addObject("dto", new CustomerModel());
+            return mv;
+        }
+        CustomerModel model = service.getModelById(new CustomerView(cid));
+        mv.addObject("dto", model);
         return mv;
     }
 
     @RequestMapping(value = "addcustomer.do", method = RequestMethod.POST)
-    public ModelAndView customeraddaction(@RequestParam(value = "name", defaultValue = "") String name,
+    public ModelAndView customeraddaction(@RequestParam(value = "cid", defaultValue = "") String cid,
+                                          @RequestParam(value = "name", defaultValue = "") String name,
                                           @RequestParam(value = "city", defaultValue = "") String city,
                                           @RequestParam(value = "address", defaultValue = "") String address,
                                           @RequestParam(value = "cname", defaultValue = "") String cname,
@@ -104,6 +114,14 @@ public class CustomerController {
                                           @RequestParam(value = "road", defaultValue = "") String road,
                                           @RequestParam(value = "remarks", defaultValue = "") String remarks,
                                           @RequestParam(value = "staffid", defaultValue = "") String staffid) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String power = (String) session.getAttribute("power");
+        ModelAndView mv = new ModelAndView();
+        if (Integer.parseInt(power) > 2) {
+            mv.setViewName("index");
+            return mv;
+        }
         CustomerModel model = new CustomerModel();
         model.setName(name);
         model.setCity(city);
@@ -147,11 +165,32 @@ public class CustomerController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ModelAndView mv = new ModelAndView();
+        //隐藏域的值不为空表示是修改
+        CustomerModel dtoModel;
+        if (!StringUtil.isNullOrEmpty(cid)) {
+            model.setCid(cid);
+            dtoModel = service.updateCustomer(model);
+        } else {
+            dtoModel = service.addCustomer(model);
+        }
         mv.setViewName("customer");
         //标记返回的页面为列表页
         mv.addObject("view", 2);
-        mv.addObject("dto", service.addCustomer(model));
+        mv.addObject("dto", dtoModel);
         return mv;
+    }
+
+    @RequestMapping(value = "deletecustomer.do", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    int customerdeleteaction(@RequestParam(value = "cid", defaultValue = "") String cid) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String power = (String) session.getAttribute("power");
+        //-1  表示没权限  0 表示失败  1 表示成功
+        if (Integer.parseInt(power) > 2) {
+            return -1;
+        }
+        return service.deleteCustomerById(cid);
     }
 }

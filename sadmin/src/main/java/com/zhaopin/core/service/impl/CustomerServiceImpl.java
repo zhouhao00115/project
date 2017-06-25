@@ -43,4 +43,16 @@ public class CustomerServiceImpl implements CustomerService {
         return dao.getCountCustomer();
     }
 
+    @Override
+    public int deleteCustomerById(String cid) {
+        if(StringUtil.isNullOrEmpty(cid)){
+            return 0;
+        }
+        return dao.deleteCustomerById(cid);
+    }
+
+    @Override
+    public CustomerModel updateCustomer(CustomerModel model) {
+        return dao.updateCustomer(model);
+    }
 }

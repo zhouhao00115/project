@@ -60,7 +60,7 @@ public class CustomerDaoImpl implements CustomerDao {
             id += 1;
             model.setCid("HS" + StringUtil.frontCompWithZore(id, 5));
             int rows = mapper.addCustomer(model);
-            if(rows>0){
+            if (rows > 0) {
                 returnModel = mapper.getCustomerById(model.getCid());
             }
             session.commit();
@@ -88,5 +88,42 @@ public class CustomerDaoImpl implements CustomerDao {
         return number;
     }
 
+    @Override
+    public int deleteCustomerById(String cid) {
+        SqlSession session = sqlSessionFactory.openSession();
+        int number = 0;
+        try {
+            CustomerMapper mapper = session.getMapper(CustomerMapper.class);
+            number = mapper.deleteById(cid);
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return number;
+    }
 
+    @Override
+    public CustomerModel updateCustomer(CustomerModel model) {
+        SqlSession session = sqlSessionFactory.openSession();
+        CustomerModel returnModel = null;
+        try {
+            CustomerMapper mapper = session.getMapper(CustomerMapper.class);
+            int rows = mapper.updateCustomer(model);
+            if (rows > 0) {
+                returnModel = model;
+            } else {
+                returnModel = mapper.getCustomerById(model.getCid());
+            }
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return returnModel;
+    }
 }

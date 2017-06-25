@@ -9,8 +9,28 @@
     <table class="table">
         <thead>
         <tr>
-            <th colspan="8">
+            <th colspan="6">
                 总计 ${dto.count} 条
+            </th>
+            <th colspan="3">
+                <h6>每页显示
+                    <small>
+                        <a href="customer.do?rows=10">10</a>
+                    </small>
+                    <small>
+                        <a href="customer.do?rows=30">30</a>
+                    </small>
+                    <small>
+                        <a href="customer.do?rows=50">50</a>
+                    </small>
+                    <small>
+                        <a href="customer.do?rows=100">100</a>
+                    </small>
+                    条
+                </h6>
+            </th>
+            <th colspan="2">
+                <li class="btn"><a href="customeradd.do">添加牧场信息</a></li>
             </th>
         </tr>
         <tr>
@@ -24,6 +44,7 @@
             <th>数据员</th>
             <th>数据员电话</th>
             <th>备注</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +63,7 @@
                 <td class="center" id="dataUser${i.index}">${customer.sname}</td>
                 <td class="center" id="dataUserPhone${i.index}">${customer.sphone}</td>
                 <td class="center" id="remark${i.index}">${customer.remarks}</td>
+                <td class="center"><h5><small><a href="customerinfo.do?number=${customer.cid}">修改</a></small></h5></td>
             </tr>
         </c:forEach>
         </tbody>

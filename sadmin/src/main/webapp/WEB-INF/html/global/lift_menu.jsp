@@ -10,7 +10,7 @@
                     class="hidden-tablet"> 牧场管理</span></a></li>
             <li><a class="ajax-link" href="customer1.do"><i class="icon-plane"></i><span
                     class="hidden-tablet"> 货车管理</span></a></li>
-            <li><a class="ajax-link" href="customer2.do"><i class="icon-user"></i><span
+            <li><a class="ajax-link" href="datauser.do"><i class="icon-user"></i><span
                     class="hidden-tablet"> 数据员管理</span></a></li>
             <li><a class="ajax-link" href="customer3.do"><i class="icon-briefcase"></i><span
                     class="hidden-tablet"> 货运订单</span></a></li>

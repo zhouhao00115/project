@@ -9,6 +9,11 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <th colspan="2">
+                <li class="btn"><a href="customer.do">返回</a></li>
+            </th>
+        </tr>
+        <tr>
             <th>描述</th>
             <th>输入</th>
         </tr>
@@ -17,85 +22,90 @@
         <tr>
             <td style='vertical-align: middle;'>牧场名称</td>
             <td>
-                <input id="name" name="name" type="text" class="form-control" placeholder="少于20个字">
+                <input id="name" name="name" type="text" class="form-control" placeholder="少于20个字" value="${dto.name}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>行政区划</td>
             <td>
-                <input id="city" name="city" type="text" class="form-control" placeholder="行政区划">
+                <input id="city" name="city" type="text" class="form-control" placeholder="行政区划" value="${dto.city}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>详细地址</td>
             <td>
-                <input id="address" name="address" type="text" class="form-control" placeholder="详细地址">
+                <input id="address" name="address" type="text" class="form-control" placeholder="详细地址" value="${dto.address}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>厂长姓名</td>
             <td>
-                <input id="cname" name="cname" type="text" class="form-control" placeholder="厂长姓名">
+                <input id="cname" name="cname" type="text" class="form-control" placeholder="厂长姓名" value="${dto.cname}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>厂长电话</td>
             <td>
-                <input id="cphone" name="cphone" type="text" class="form-control" placeholder="厂长电话">
+                <input id="cphone" name="cphone" type="text" class="form-control" placeholder="厂长电话" value="${dto.cphone}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>交奶地行政区划</td>
             <td>
-                <input id="naicity" name="naicity" type="text" class="form-control" placeholder="交奶地行政区划">
+                <input id="naicity" name="naicity" type="text" class="form-control" placeholder="交奶地行政区划" value="${dto.naicity}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>交奶地详细地址</td>
             <td>
-                <input id="naiaddress" name="naiaddress" type="text" class="form-control" placeholder="交奶地详细地址">
+                <input id="naiaddress" name="naiaddress" type="text" class="form-control" placeholder="交奶地详细地址" value="${dto.naiaddress}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>牧场规模</td>
             <td>
-                <input id="scale" name="scale" type="text" class="form-control" placeholder="牧场规模">
+                <input id="scale" name="scale" type="text" class="form-control" placeholder="牧场规模" value="${dto.scale}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>用饲料量(吨/月)</td>
             <td>
-                <input id="used" name="used" type="text" class="form-control" placeholder="用饲料量">
+                <input id="used" name="used" type="text" class="form-control" placeholder="用饲料量" value="${dto.used}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>库存(吨)</td>
             <td>
-                <input id="left" name="left" type="text" class="form-control" placeholder="库存">
+                <input id="left" name="left" type="text" class="form-control" placeholder="库存" value="${dto.left}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>道路情况</td>
             <td>
-                <input id="road" name="road" type="text" class="form-control" placeholder="道路情况">
+                <input id="road" name="road" type="text" class="form-control" placeholder="道路情况" value="${dto.road}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>预计运费</td>
             <td>
-                <input id="price" name="price" type="text" class="form-control" placeholder="预计运费">
+                <input id="price" name="price" type="text" class="form-control" placeholder="预计运费" value="${dto.price}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>备注</td>
             <td>
-                <input id="remarks" name="remarks" type="text" class="form-control" placeholder="备注">
+                <input id="remarks" name="remarks" type="text" class="form-control" placeholder="备注" value="${dto.remarks}">
             </td>
         </tr>
         <tr>
             <td style='vertical-align: middle;'>数据员</td>
             <td>
-                <input id="staffid" name="staffid" type="text" class="form-control" placeholder="数据员">
+                <%--<input id="staffid" name="staffid" type="text" class="form-control" placeholder="数据员" value="${dto.staffid}">--%>
+                <select class="form-control" id="staffid" name="staffid">
+                    <c:forEach items="${datauser}" var="data" varStatus="i">
+                        <option value="${data.staffid}">${data.staffid}-${data.sname}</option>
+                    </c:forEach>
+                </select>
             </td>
         </tr>
         <tr>
@@ -105,6 +115,7 @@
         </tr>
         </tbody>
     </table>
+    <input type="hidden" id="cid" name="cid" value="${dto.cid}">
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
         <div class="modal-dialog">
@@ -114,7 +125,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="title">
-                        是否确认添加
+                        是否确认
                     </h4>
                 </div>
                 <div class="modal-body">

@@ -34,5 +34,6 @@
     <mappers>
         <mapper class="com.zhaopin.core.mapper.CustomerMapper" />
         <mapper class="com.zhaopin.core.mapper.AdminMapper" />
+        <mapper class="com.zhaopin.core.mapper.DataUserMapper"/>
     </mappers>
 </configuration>

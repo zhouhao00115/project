@@ -16,4 +16,8 @@ public interface CustomerDao {
     public CustomerModel addCustomer(CustomerModel model);
 
     public int getCountCustomer();
+
+    public int deleteCustomerById(String cid);
+
+    public CustomerModel updateCustomer(CustomerModel model);
 }
