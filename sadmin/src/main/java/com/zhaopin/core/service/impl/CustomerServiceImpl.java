@@ -32,4 +32,15 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return dao.getCustomerById(view.getCustonerId());
     }
+
+    @Override
+    public CustomerModel addCustomer(CustomerModel model) {
+        return dao.addCustomer(model);
+    }
+
+    @Override
+    public int getCountCustomer() {
+        return dao.getCountCustomer();
+    }
+
 }

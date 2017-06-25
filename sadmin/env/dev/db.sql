@@ -2,9 +2,9 @@
 --drop table customer;
 --create table customer(cid int primary key,name varchar(100),city varchar (20),address varchar(100),
 --cname varchar(20),cphone varchar(20),naicity varchar(20),naiaddress varchar(100),
---scale varchar(20),used int,left int ,road varchar(20),longitude double,latitude double,staffid int,remarks varchar(200));
---insert into customer(cid,name,city,address,cname ,cphone,naicity,naiaddress,scale,used,left ,road,longitude,latitude,staffid,remarks) values ('HS001','测试牧场','河北石家庄市','河北省衡水市某村','张三','13512345678','河北省衡水市','河北省衡水市某村',
---'20头高产奶牛10头猪',10,12,'高速',115.703188,37.764869,1,'备注');
+--scale varchar(20),used int,left int ,road varchar(20),price int,longitude double,latitude double,staffid int,remarks varchar(200));
+--insert into customer(cid,name,city,address,cname ,cphone,naicity,naiaddress,scale,used,left ,road,price,longitude,latitude,staffid,remarks) values ('HS00001','测试牧场','河北石家庄市','河北省衡水市某村','张三','13512345678','河北省衡水市','河北省衡水市某村',
+--'20头高产奶牛10头猪',10,12,'高速',10,115.703188,37.764869,1,'备注');
 --select * from customer;
 --货车表
 --drop table truck;
@@ -25,7 +25,7 @@
 --数据库字段对照表
 --customer：牧场信息表
 --cid牧场id HS开头+000编号,name:牧场简称，city：牧场所在行政区划，address：牧场地址，cname：厂长姓名，cphone：厂长电话，naicity：交奶地的行政区划
---naiaddress：交奶地的具体地址，scale：牧场规模，used：月使用量（吨/月），left：库存剩余量，road：道路情况，longitude：经度，latitude：纬度，remarks备注
+--naiaddress：交奶地的具体地址，scale：牧场规模，used：月使用量（吨/月），left：库存剩余量，road：道路情况，price（元/吨）预计运费，longitude：经度，latitude：纬度，remarks备注
 --truck货车信息表
 --tid:货车id 主键唯一编码，license：车牌号 id，tname:车主姓名，tphone：车主电话，ttype：货车类型，capacity：容量(吨)，citys:车主中意城市（按英文,隔开）,remarks:备注
 --staff：工作人员表
@@ -35,5 +35,5 @@
 --user:用户登陆信息表
 --id:登陆用户id，username：用户名，password：密码，power：权限 1、超级管理员，2、普通管理员，3、只读权限
 
-select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, t1.staffid ,remarks  from customer as t1,
-(select * from staff) as t2 where t1.staffid=t2.staffid order by cid desc limit 1 offset 0;
+--select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, t1.staffid ,remarks  from customer as t1,
+--(select * from staff) as t2 where t1.staffid=t2.staffid order by cid desc limit 1 offset 0;

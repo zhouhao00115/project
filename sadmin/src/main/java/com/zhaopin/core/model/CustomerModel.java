@@ -16,6 +16,7 @@ public class CustomerModel {
     private int used;
     private int left;
     private String road;
+    private int price;
     private double longitude;
     private double latitude;
     private String remarks;
@@ -118,6 +119,14 @@ public class CustomerModel {
 
     public void setRoad(String road) {
         this.road = road;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public double getLongitude() {

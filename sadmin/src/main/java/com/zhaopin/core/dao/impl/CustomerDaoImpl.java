@@ -5,6 +5,7 @@ import com.zhaopin.core.dbutil.DBFactory;
 import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.mapper.CustomerMapper;
 import com.zhaopin.core.model.CustomerModel;
+import com.zhaopin.core.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -47,4 +48,45 @@ public class CustomerDaoImpl implements CustomerDao {
         }
         return customerModel;
     }
+
+    @Override
+    public CustomerModel addCustomer(CustomerModel model) {
+        SqlSession session = sqlSessionFactory.openSession();
+        CustomerModel returnModel = null;
+        try {
+            CustomerMapper mapper = session.getMapper(CustomerMapper.class);
+            String lastId = mapper.getLastId();
+            int id = Integer.parseInt(lastId.substring(2, lastId.length()));
+            id += 1;
+            model.setCid("HS" + StringUtil.frontCompWithZore(id, 5));
+            int rows = mapper.addCustomer(model);
+            if(rows>0){
+                returnModel = mapper.getCustomerById(model.getCid());
+            }
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return returnModel;
+    }
+
+    @Override
+    public int getCountCustomer() {
+        SqlSession session = sqlSessionFactory.openSession();
+        int number = 0;
+        try {
+            CustomerMapper mapper = session.getMapper(CustomerMapper.class);
+            number = mapper.count();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return number;
+    }
+
+
 }

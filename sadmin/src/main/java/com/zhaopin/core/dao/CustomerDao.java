@@ -12,4 +12,8 @@ public interface CustomerDao {
     public List<CustomerModel> query(CustomerView view);
 
     public CustomerModel getCustomerById(String customerId);
+
+    public CustomerModel addCustomer(CustomerModel model);
+
+    public int getCountCustomer();
 }

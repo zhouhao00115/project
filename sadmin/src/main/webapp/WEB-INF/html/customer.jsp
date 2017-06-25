@@ -52,6 +52,9 @@
                         <c:if test="${'2' eq view}">
                             <jsp:include page="customer/customerinfo.jsp"></jsp:include>
                         </c:if>
+                        <c:if test="${'3' eq view}">
+                            <jsp:include page="customer/customeradd.jsp"></jsp:include>
+                        </c:if>
                     </div>
                 </div>
             </div>

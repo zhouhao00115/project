@@ -19,6 +19,8 @@
             <th>牧场所在城市</th>
             <th>联系方式</th>
             <th>牧场规模</th>
+            <th>月使用量</th>
+            <th>剩余库存</th>
             <th>数据员</th>
             <th>数据员电话</th>
             <th>备注</th>
@@ -35,6 +37,8 @@
                 <td class="center" id="city${i.index}">${customer.city}</td>
                 <td class="center" id="phone${i.index}">${customer.cphone}</td>
                 <td class="center" id="scale${i.index}">${customer.scale}</td>
+                <td class="center" id="used${i.index}">${customer.used}</td>
+                <td class="center" id="left${i.index}">${customer.left}</td>
                 <td class="center" id="dataUser${i.index}">${customer.sname}</td>
                 <td class="center" id="dataUserPhone${i.index}">${customer.sphone}</td>
                 <td class="center" id="remark${i.index}">${customer.remarks}</td>

@@ -7,4 +7,8 @@ public class StringUtil {
     public static boolean isNullOrEmpty(String string) {
         return null == string || "".equals(string.trim());
     }
+
+    public static String frontCompWithZore(int sourceDate, int formatLength) {
+        return String.format("%0" + formatLength + "d", sourceDate);
+    }
 }

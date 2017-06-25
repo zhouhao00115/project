@@ -75,8 +75,83 @@ public class CustomerController {
         //标记返回的页面为列表页
         mv.addObject("view", 2);
         CustomerModel model = service.getModelById(new CustomerView(number));
-        mv.addObject("dto",model);
+        mv.addObject("dto", model);
         return mv;
     }
 
+    @RequestMapping(value = "customeradd.do", method = RequestMethod.GET)
+    public ModelAndView customeradd() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customer");
+        //标记返回的页面为列表页
+        mv.addObject("view", 3);
+        mv.addObject("dto", new CustomerModel());
+        return mv;
+    }
+
+    @RequestMapping(value = "addcustomer.do", method = RequestMethod.POST)
+    public ModelAndView customeraddaction(@RequestParam(value = "name", defaultValue = "") String name,
+                                          @RequestParam(value = "city", defaultValue = "") String city,
+                                          @RequestParam(value = "address", defaultValue = "") String address,
+                                          @RequestParam(value = "cname", defaultValue = "") String cname,
+                                          @RequestParam(value = "cphone", defaultValue = "") String cphone,
+                                          @RequestParam(value = "naicity", defaultValue = "") String naicity,
+                                          @RequestParam(value = "naiaddress", defaultValue = "") String naiaddress,
+                                          @RequestParam(value = "scale", defaultValue = "") String scale,
+                                          @RequestParam(value = "used", defaultValue = "") String used,
+                                          @RequestParam(value = "price", defaultValue = "") String price,
+                                          @RequestParam(value = "left", defaultValue = "") String left,
+                                          @RequestParam(value = "road", defaultValue = "") String road,
+                                          @RequestParam(value = "remarks", defaultValue = "") String remarks,
+                                          @RequestParam(value = "staffid", defaultValue = "") String staffid) {
+        CustomerModel model = new CustomerModel();
+        model.setName(name);
+        model.setCity(city);
+        model.setAddress(address);
+        model.setCname(cname);
+        model.setCphone(cphone);
+        model.setNaicity(naicity);
+        model.setNaiaddress(naiaddress);
+        model.setScale(scale);
+        try {
+            if (StringUtil.isNullOrEmpty(used)) {
+                used = "0";
+            }
+            model.setUsed(Integer.parseInt(used));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (StringUtil.isNullOrEmpty(left)) {
+                left = "0";
+            }
+            model.setLeft(Integer.parseInt(left));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (StringUtil.isNullOrEmpty(price)) {
+                price = "0";
+            }
+            model.setPrice(Integer.parseInt(price));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.setRoad(road);
+        model.setRemarks(remarks);
+        try {
+            if (StringUtil.isNullOrEmpty(staffid)) {
+                staffid = "1";
+            }
+            model.setStaffid(Integer.parseInt(staffid));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customer");
+        //标记返回的页面为列表页
+        mv.addObject("view", 2);
+        mv.addObject("dto", service.addCustomer(model));
+        return mv;
+    }
 }

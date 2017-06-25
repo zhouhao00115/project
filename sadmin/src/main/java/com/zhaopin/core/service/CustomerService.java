@@ -12,4 +12,8 @@ public interface CustomerService {
     public List<CustomerModel> getList(CustomerView view);
 
     public CustomerModel getModelById(CustomerView view);
+
+    public CustomerModel addCustomer(CustomerModel model);
+
+    public int getCountCustomer();
 }
