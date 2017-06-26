@@ -13,10 +13,14 @@
                 <li class="btn"><a href="customer.do">返回</a></li>
             </th>
             <th>
-                <a href="customeradd.do?cid=${dto.cid}">修改牧场信息</a>
+                <c:if test="${'1' eq sessionScope.power}">
+                    <a href="customeradd.do?cid=${dto.cid}">修改牧场信息</a>
+                </c:if>
             </th>
             <th>
-                <li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>
+                <c:if test="${'1' eq sessionScope.power}">
+                    <li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>
+                </c:if>
             </th>
         </tr>
         </thead>

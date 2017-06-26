@@ -30,7 +30,9 @@
                 </h6>
             </th>
             <th colspan="2">
-                <li class="btn"><a href="customeradd.do">添加牧场信息</a></li>
+                <c:if test="${'1' eq sessionScope.power}">
+                    <li class="btn"><a href="customeradd.do">添加牧场信息</a></li>
+                </c:if>
             </th>
         </tr>
         <tr>
