@@ -94,7 +94,7 @@
             </td>
         </tr>
         <tr>
-            <td style='vertical-align: middle;'>预计运费</td>
+            <td style='vertical-align: middle;'>预计运费(元/吨)</td>
             <td>
                 <input id="price" name="price" type="text" class="form-control" placeholder="预计运费" value="${dto.price}">
             </td>

@@ -70,7 +70,7 @@
             <td></td>
         </tr>
         <tr>
-            <td class="center">月饲料用量(吨/月)</td>
+            <td class="center">月饲料用量(元/吨)</td>
             <td class="center" id="used">${dto.used}</td>
             <td></td>
             <td></td>
