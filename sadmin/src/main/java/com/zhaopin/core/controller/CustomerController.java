@@ -64,7 +64,16 @@ public class CustomerController {
         CustomerDto dto = new CustomerDto();
         dto.setCount(service.getCountCustomer());
         dto.setList(list);
-        dto.setPage(1);
+        dto.setPage(start/rows+1);
+        dto.setStart(start);
+        dto.setRows(rows);
+        if (dto.getCount() > rows) {
+            if(dto.getCount() % rows == 0){
+                dto.setEnd((dto.getCount() / rows) * rows-rows);
+            }else {
+                dto.setEnd((dto.getCount() / rows) * rows);
+            }
+        }
         mv.addObject("dto", dto);
         //标记返回的页面为列表页
         mv.addObject("view", 1);
@@ -97,6 +106,7 @@ public class CustomerController {
         mv.addObject("dto", model);
         return mv;
     }
+
     @RequestMapping(value = "addcustomer.do", method = RequestMethod.POST)
     public ModelAndView customeraddaction(@RequestParam(value = "cid", defaultValue = "") String cid,
                                           @RequestParam(value = "name", defaultValue = "") String name,

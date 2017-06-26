@@ -71,10 +71,15 @@
 </div>
 <div class="pagination pagination-centered">
     <ul>
-        <li><a href="#">首页</a></li>
-        <li><a href="#">上一页</a></li>
-        <li><a href="#">下一页</a></li>
-        <li><a href="#">尾页</a></li>
+        <li><a href="customer.do?start=0&rows=${dto.rows}">首页</a></li>
+        <c:if test="${dto.start >= dto.rows}">
+            <li><a href="customer.do?start=${dto.start - dto.rows}&rows=${dto.rows}">上一页</a></li>
+        </c:if>
+        <li><a href="#">${dto.page}</a></li>
+        <c:if test="${dto.count > dto.start + dto.rows}">
+            <li><a href="customer.do?start=${dto.start + dto.rows}&rows=${dto.rows}">下一页</a></li>
+        </c:if>
+        <li><a href="customer.do?start=${dto.end}&rows=${dto.rows}">尾页</a></li>
     </ul>
     <p class="text-right">
         <ul class="pagination pagination-sm">
