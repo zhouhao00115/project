@@ -10,7 +10,14 @@ import java.util.List;
  */
 public interface DataUserDao {
     public List<DataUserModel> query(DataUserView view);
+
     public List<DataUserModel> allUser();
+
     public int count();
+
     public DataUserModel getDataUserById(int staffid);
+
+    public DataUserModel addDataUser(DataUserModel model);
+
+    public DataUserModel updateDataUser(DataUserModel model);
 }

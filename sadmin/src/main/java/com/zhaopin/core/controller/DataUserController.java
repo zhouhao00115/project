@@ -6,6 +6,7 @@ import com.zhaopin.core.dto.datauser.DataUserView;
 import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.model.DataUserModel;
 import com.zhaopin.core.service.DataUserService;
+import com.zhaopin.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class DataUserController {
     @Autowired
     private DataUserService dataUserService;
 
-    @RequestMapping(value = "datauser.do",method = RequestMethod.GET)
+    @RequestMapping(value = "datauser.do", method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response,
                               @RequestParam(value = "start", defaultValue = "0") String numberstart,
                               @RequestParam(value = "rows", defaultValue = "10") String numberrows,
@@ -58,23 +59,72 @@ public class DataUserController {
         }
         ModelAndView mv = new ModelAndView();
         mv.setViewName("datauser");
-        List<DataUserModel> models = dataUserService.query(new DataUserView(start,rows));
+        List<DataUserModel> models = dataUserService.query(new DataUserView(start, rows));
         DataUserDto dataUserDto = new DataUserDto();
         dataUserDto.setList(models);
         dataUserDto.setPage(1);
         dataUserDto.setCount(dataUserService.count());
-        mv.addObject("dto",dataUserDto);
+        mv.addObject("dto", dataUserDto);
         mv.addObject("view", 1);
         return mv;
     }
 
-    @RequestMapping(value = "datauseradd.do", method = RequestMethod.GET)
-    public ModelAndView datauserinfo(@RequestParam(value = "staffid", defaultValue = "0") String staffid) {
+    @RequestMapping(value = "adddatauseraction.do", method = RequestMethod.POST)
+    public ModelAndView addaction(@RequestParam(value = "staffid", defaultValue = "") String staffid,
+                                  @RequestParam(value = "sname", defaultValue = "") String sname,
+                                  @RequestParam(value = "sphone", defaultValue = "") String sphone,
+                                  @RequestParam(value = "gender", defaultValue = "0") String gender,
+                                  @RequestParam(value = "remarks", defaultValue = "") String remarks) {
+        DataUserModel model = new DataUserModel();
+        model.setSname(sname);
+        model.setSphone(sphone);
+        try {
+            model.setGender(Integer.parseInt(gender));
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.setGender(1);
+        }
+        model.setRemarks(remarks);
+        if (!(StringUtil.isNullOrEmpty(staffid) || "0".equals(staffid))) {
+            //修改数据员
+            try {
+                model.setStaffid(Integer.parseInt(staffid));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         ModelAndView mv = new ModelAndView();
         mv.setViewName("datauser");
-        //标记返回的页面为列表页
-        mv.addObject("dto", dataUserService.getDataUserById(staffid));
+        mv.addObject("dto", dataUserService.addUser(model));
         mv.addObject("view", 2);
+        return mv;
+    }
+
+    @RequestMapping(value = "datauserinfo.do", method = RequestMethod.GET)
+    public ModelAndView datauserinfo(@RequestParam(value = "staffid", defaultValue = "") String staffid) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("datauser");
+        mv.addObject("view", 2);
+        if (StringUtil.isNullOrEmpty(staffid)) {
+            mv.addObject("dto", new DataUserModel());
+        } else {
+            //标记返回的页面为列表页
+            mv.addObject("dto", dataUserService.getDataUserById(staffid));
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "adddatauser.do", method = RequestMethod.GET)
+    public ModelAndView datauseradd(@RequestParam(value = "staffid", defaultValue = "") String staffid) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("datauser");
+        mv.addObject("view", 3);
+        if (StringUtil.isNullOrEmpty(staffid)) {
+            mv.addObject("dto", new DataUserModel());
+        } else {
+            //标记返回的页面为列表页
+            mv.addObject("dto", dataUserService.getDataUserById(staffid));
+        }
         return mv;
     }
 }

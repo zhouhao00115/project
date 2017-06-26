@@ -47,4 +47,12 @@ public class DataUserServiceImpl implements DataUserService {
     public int count() {
         return dao.count();
     }
+
+    @Override
+    public DataUserModel addUser(DataUserModel model) {
+        if (model.getStaffid() > 0) {
+            return dao.updateDataUser(model);
+        }
+        return dao.addDataUser(model);
+    }
 }

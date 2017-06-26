@@ -100,14 +100,15 @@
         });
         var valus = [];
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
-        var position = "${customer.longitude}" + "," + "${customer.latitude}";
-        marker = new AMap.Marker({
-            icon: icon,
-            position: position.split(","),
-            offset: new AMap.Pixel(-12, -12),
-            title: 'test'
-        });
-        marker.setMap(map);
+            var position = "${customer.longitude}" + "," + "${customer.latitude}";
+            marker = new AMap.Marker({
+                icon: icon,
+                position: position.split(","),
+                offset: new AMap.Pixel(-12, -12),
+                title: 'test'
+            });
+            marker.setMap(map);
         </c:forEach>
     }
+
 </script>

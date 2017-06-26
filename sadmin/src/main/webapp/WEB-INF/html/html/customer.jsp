@@ -27,7 +27,7 @@
                         <a href="index.do"> 首页 </a> <span class="divider">/</span>
                     </li>
                     <li>
-                        <a href="datauser.do"> 数据员管理</a>
+                        <a href="customer.do"> 牧场管理</a>
                     </li>
                 </ul>
             </div>
@@ -45,15 +45,15 @@
                         </div>
                     </div>
 
-                    <div class="box-content" id="userlist">
+                    <div class="box-content" id="customerlist">
                         <c:if test="${'1' eq view}">
-                            <jsp:include page="datauser/userlist.jsp"></jsp:include>
+                            <jsp:include page="customer/customerlist.jsp"></jsp:include>
                         </c:if>
                         <c:if test="${'2' eq view}">
-                            <jsp:include page="datauser/userinfo.jsp"></jsp:include>
+                            <jsp:include page="customer/customerinfo.jsp"></jsp:include>
                         </c:if>
                         <c:if test="${'3' eq view}">
-                            <jsp:include page="datauser/useradd.jsp"></jsp:include>
+                            <jsp:include page="customer/customeradd.jsp"></jsp:include>
                         </c:if>
                     </div>
                 </div>

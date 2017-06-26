@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.mail.Session;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class DataUserDaoImpl implements DataUserDao {
     @Override
     public int count() {
         SqlSession session = sqlSessionFactory.openSession();
-        int  number = 0;
+        int number = 0;
         try {
             DataUserMapper mapper = session.getMapper(DataUserMapper.class);
             number = mapper.count();
@@ -66,7 +67,7 @@ public class DataUserDaoImpl implements DataUserDao {
     @Override
     public DataUserModel getDataUserById(int staffid) {
         SqlSession session = sqlSessionFactory.openSession();
-        DataUserModel  model = null;
+        DataUserModel model = null;
         try {
             DataUserMapper mapper = session.getMapper(DataUserMapper.class);
             model = mapper.getUserById(staffid);
@@ -76,5 +77,49 @@ public class DataUserDaoImpl implements DataUserDao {
             session.close();
         }
         return model;
+    }
+
+    @Override
+    public DataUserModel addDataUser(DataUserModel model) {
+        SqlSession session = sqlSessionFactory.openSession();
+        DataUserModel returnModel = null;
+        try {
+            DataUserMapper mapper = session.getMapper(DataUserMapper.class);
+            int id = mapper.getLastId();
+            id += 1;
+            model.setStaffid(id);
+            int rows = mapper.addDataUser(model);
+            if (rows > 0) {
+                returnModel = mapper.getUserById(id);
+                session.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return returnModel;
+    }
+
+    @Override
+    public DataUserModel updateDataUser(DataUserModel model) {
+        SqlSession session = sqlSessionFactory.openSession();
+        DataUserModel returnModel = null;
+        try {
+            DataUserMapper mapper = session.getMapper(DataUserMapper.class);
+            int rows = mapper.updateDataUser(model);
+            if (rows > 0) {
+                session.commit();
+                return model;
+            }
+            returnModel = mapper.getUserById(model.getStaffid());
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return returnModel;
     }
 }

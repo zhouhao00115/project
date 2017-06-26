@@ -27,7 +27,7 @@
                         <a href="index.do"> 首页 </a> <span class="divider">/</span>
                     </li>
                     <li>
-                        <a href="datauser.do"> 数据员管理</a>
+                        <a href="muchang.do"> 货量信息 </a>
                     </li>
                 </ul>
             </div>
@@ -45,16 +45,8 @@
                         </div>
                     </div>
 
-                    <div class="box-content" id="userlist">
-                        <c:if test="${'1' eq view}">
-                            <jsp:include page="datauser/userlist.jsp"></jsp:include>
-                        </c:if>
-                        <c:if test="${'2' eq view}">
-                            <jsp:include page="datauser/userinfo.jsp"></jsp:include>
-                        </c:if>
-                        <c:if test="${'3' eq view}">
-                            <jsp:include page="datauser/useradd.jsp"></jsp:include>
-                        </c:if>
+                    <div class="box-content" id="muchanginfo">
+                        <jsp:include page="muchang/muchanglist.jsp"></jsp:include>
                     </div>
                 </div>
             </div>

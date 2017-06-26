@@ -97,7 +97,6 @@ public class CustomerController {
         mv.addObject("dto", model);
         return mv;
     }
-
     @RequestMapping(value = "addcustomer.do", method = RequestMethod.POST)
     public ModelAndView customeraddaction(@RequestParam(value = "cid", defaultValue = "") String cid,
                                           @RequestParam(value = "name", defaultValue = "") String name,
@@ -112,6 +111,8 @@ public class CustomerController {
                                           @RequestParam(value = "price", defaultValue = "") String price,
                                           @RequestParam(value = "left", defaultValue = "") String left,
                                           @RequestParam(value = "road", defaultValue = "") String road,
+                                          @RequestParam(value = "longitude", defaultValue = "") String longitude,
+                                          @RequestParam(value = "latitude", defaultValue = "") String latitude,
                                           @RequestParam(value = "remarks", defaultValue = "") String remarks,
                                           @RequestParam(value = "staffid", defaultValue = "") String staffid) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -131,6 +132,8 @@ public class CustomerController {
         model.setNaicity(naicity);
         model.setNaiaddress(naiaddress);
         model.setScale(scale);
+        model.setLongitude(Double.parseDouble(longitude));
+        model.setLatitude(Double.parseDouble(latitude));
         try {
             if (StringUtil.isNullOrEmpty(used)) {
                 used = "0";
