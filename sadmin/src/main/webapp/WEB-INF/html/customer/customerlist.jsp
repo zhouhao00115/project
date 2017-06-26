@@ -63,7 +63,7 @@
                 <td class="center" id="dataUser${i.index}">${customer.sname}</td>
                 <td class="center" id="dataUserPhone${i.index}">${customer.sphone}</td>
                 <td class="center" id="remark${i.index}">${customer.remarks}</td>
-                <td class="center"><h5><small><a href="customerinfo.do?number=${customer.cid}">修改</a></small></h5></td>
+                <td class="center"><h5><small><a href="customerinfo.do?number=${customer.cid}">查看</a></small></h5></td>
             </tr>
         </c:forEach>
         </tbody>
