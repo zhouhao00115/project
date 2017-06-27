@@ -31,7 +31,6 @@
                 <li class="btn" data-toggle="modal" data-target="#position">获取坐标</li>
                 <input type="hidden" id="longitude" name="longitude" value="${dto.longitude}">
                 <input type="hidden" id="latitude" name="latitude" value="${dto.latitude}">
-                <>
             </td>
         </tr>
         <tr>
