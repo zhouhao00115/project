@@ -62,7 +62,17 @@ public class DataUserController {
         List<DataUserModel> models = dataUserService.query(new DataUserView(start, rows));
         DataUserDto dataUserDto = new DataUserDto();
         dataUserDto.setList(models);
-        dataUserDto.setPage(1);
+        dataUserDto.setPage(start/rows+1);
+        dataUserDto.setStart(start);
+        dataUserDto.setCount(dataUserService.count());
+        dataUserDto.setRows(rows);
+        if (dataUserDto.getCount() > rows) {
+            if(dataUserDto.getCount() % rows == 0){
+                dataUserDto.setEnd((dataUserDto.getCount() / rows) * rows-rows);
+            }else {
+                dataUserDto.setEnd((dataUserDto.getCount() / rows) * rows);
+            }
+        }
         dataUserDto.setCount(dataUserService.count());
         mv.addObject("dto", dataUserDto);
         mv.addObject("view", 1);

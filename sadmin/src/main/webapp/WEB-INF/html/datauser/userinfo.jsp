@@ -13,10 +13,14 @@
                 <li class="btn"><a href="datauser.do">返回</a></li>
             </th>
             <th>
-                <a href="adddatauser.do?staffid=${dto.staffid}">修改数据员信息</a>
+                <c:if test="${'1' eq sessionScope.power}">
+                    <a href="adddatauser.do?staffid=${dto.staffid}">修改数据员信息</a>
+                </c:if>
             </th>
             <th>
-                <li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>
+                <c:if test="${'1' eq sessionScope.power}">
+                    <li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>
+                </c:if>
             </th>
         </tr>
         </thead>

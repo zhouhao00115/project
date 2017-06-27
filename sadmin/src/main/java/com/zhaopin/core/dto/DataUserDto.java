@@ -10,6 +10,9 @@ import java.util.List;
 public class DataUserDto {
     private int count;
     private int page;
+    private int start;
+    private int rows;
+    private int end;
     private List<DataUserModel> list;
 
     public int getCount() {
@@ -34,5 +37,29 @@ public class DataUserDto {
 
     public void setList(List<DataUserModel> list) {
         this.list = list;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public void setEnd(int end) {
+        this.end = end;
     }
 }

@@ -30,7 +30,9 @@
                 </h6>
             </th>
             <th colspan="1">
-                <li class="btn"><a href="adddatauser.do">新增数据员</a></li>
+                <c:if test="${'1' eq sessionScope.power}">
+                    <li class="btn"><a href="adddatauser.do">新增数据员</a></li>
+                </c:if>
             </th>
         </tr>
         <tr>
@@ -55,7 +57,7 @@
                     <c:if test="${'2' eq data.gender}">女</c:if>
                 </td>
                 <td class="center" id="remarks${i.index}">${data.remarks}</td>
-                <td class="center"><h5><small><a href="datauserinfo.do?staffid=${data.staffid}">修改</a></small></h5></td>
+                <td class="center"><h5><small><a href="datauserinfo.do?staffid=${data.staffid}">查看</a></small></h5></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -63,10 +65,15 @@
 </div>
 <div class="pagination pagination-centered">
     <ul>
-        <li><a href="#">首页</a></li>
-        <li><a href="#">上一页</a></li>
-        <li><a href="#">下一页</a></li>
-        <li><a href="#">尾页</a></li>
+        <li><a href="datauser.do?start=0&rows=${dto.rows}">首页</a></li>
+        <c:if test="${dto.start >= dto.rows}">
+            <li><a href="datauser.do?start=${dto.start - dto.rows}&rows=${dto.rows}">上一页</a></li>
+        </c:if>
+        <li><a href="#">${dto.page}</a></li>
+        <c:if test="${dto.count > dto.start + dto.rows}">
+            <li><a href="datauser.do?start=${dto.start + dto.rows}&rows=${dto.rows}">下一页</a></li>
+        </c:if>
+        <li><a href="datauser.do?start=${dto.end}&rows=${dto.rows}">尾页</a></li>
     </ul>
     <p class="text-right">
     <ul class="pagination pagination-sm">

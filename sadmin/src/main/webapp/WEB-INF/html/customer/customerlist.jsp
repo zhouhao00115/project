@@ -105,14 +105,13 @@
             //icon可缺省，缺省时为默认的蓝色水滴图标，
             size: new AMap.Size(30, 30)
         });
-        var valus = [];
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
             var position = "${customer.longitude}" + "," + "${customer.latitude}";
             marker = new AMap.Marker({
                 icon: icon,
                 position: position.split(","),
                 offset: new AMap.Pixel(-12, -12),
-                title: 'test'
+                title: '${customer.cid}--${customer.name}'
             });
             marker.setMap(map);
         </c:forEach>

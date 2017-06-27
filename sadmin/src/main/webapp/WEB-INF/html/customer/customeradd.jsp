@@ -31,6 +31,7 @@
                 <li class="btn" data-toggle="modal" data-target="#position">获取坐标</li>
                 <input type="hidden" id="longitude" name="longitude" value="${dto.longitude}">
                 <input type="hidden" id="latitude" name="latitude" value="${dto.latitude}">
+                <>
             </td>
         </tr>
         <tr>
@@ -182,10 +183,24 @@
             center: [115.562084, 38.016749],
             zoom: 9
         });
+        map.plugin(["AMap.ToolBar"], function () {
+            map.addControl(new AMap.ToolBar());
+        });
+        var icon = new AMap.Icon({
+            image: 'img/niu.jpg',//24px*24px
+            //icon可缺省，缺省时为默认的蓝色水滴图标，
+            size: new AMap.Size(30, 30)
+        });
+        marker = new AMap.Marker({
+            icon: icon,
+            offset: new AMap.Pixel(-12, -12)
+        });
         map.on('click', function(e) {
             $("#longitude").val(e.lnglat.getLng());
             $("#latitude").val(e.lnglat.getLat());
-            alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图！');
+            var position = e.lnglat.getLng()+','+e.lnglat.getLat();
+            marker.setPosition(position.split(","));
+            marker.setMap(map);
         });
     }
 </script>
