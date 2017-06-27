@@ -11,6 +11,10 @@ import java.util.List;
  */
 public interface AdminService {
     public AdminModel loginByName(String username);
+
     public AdminCountDto getCountAdmin();
+
     public List<AdminModel> getList(AdminView view);
+
+    public AdminModel getAdminById(int id);
 }

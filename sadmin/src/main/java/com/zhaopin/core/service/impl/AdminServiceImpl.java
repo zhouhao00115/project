@@ -40,4 +40,12 @@ public class AdminServiceImpl implements AdminService {
         }
         return dao.query(view);
     }
+
+    @Override
+    public AdminModel getAdminById(int id) {
+        if (id == 0) {
+            return new AdminModel();
+        }
+        return dao.getAdminById(id);
+    }
 }

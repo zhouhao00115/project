@@ -2,7 +2,9 @@ package com.zhaopin.core.controller;
 
 import com.zhaopin.core.dto.AdminDto;
 import com.zhaopin.core.dto.admin.AdminView;
+import com.zhaopin.core.model.AdminModel;
 import com.zhaopin.core.service.AdminService;
+import com.zhaopin.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -70,9 +72,27 @@ public class AdminController {
         }
         mv.addObject("dto", dto);
         mv.setViewName("admin");
-        mv.addObject("view", "1");
+        mv.addObject("view", 1);
         return mv;
     }
 
-//    addadmin 新增管理员--查询页面
+    @RequestMapping(value = "addadmin.do", method = RequestMethod.GET)
+    public ModelAndView datauserinfo(@RequestParam(value = "id", defaultValue = "0") String id) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin");
+        if (StringUtil.isNullOrEmpty(id)) {
+            mv.addObject("dto", new AdminModel());
+            mv.addObject("view", 3);
+        } else {
+            int number = 0;
+            try{
+                number = Integer.parseInt(id);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            //标记返回的页面为列表页
+            mv.addObject("dto", adminService.getAdminById(number));
+        }
+        return mv;
+    }
 }

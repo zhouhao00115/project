@@ -59,6 +59,21 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
+    public AdminModel getAdminById(int id) {
+        SqlSession session = sqlSessionFactory.openSession();
+        AdminModel adminModel = null;
+        try {
+            AdminMapper mapper = session.getMapper(AdminMapper.class);
+            adminModel = mapper.getAdminById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return adminModel;
+    }
+
+    @Override
     public AdminModel loginByName(String username) {
         SqlSession session = sqlSessionFactory.openSession();
         AdminModel adminModel = null;

@@ -19,6 +19,9 @@ public interface AdminMapper {
     @Select("select id,username,password,power from user where username=#{username} order by id desc limit 0,1")
     AdminModel loginByUsername(String username);
 
+    @Select("select id,username,power from user where id=#{id} order by id desc limit 0,1")
+    AdminModel getAdminById(int id);
+
     @Select("select count(*) from user")
     int countAll();
 
@@ -27,4 +30,6 @@ public interface AdminMapper {
 
     @Select("select count(*) from user where power=2")
     int countread();
+
+
 }

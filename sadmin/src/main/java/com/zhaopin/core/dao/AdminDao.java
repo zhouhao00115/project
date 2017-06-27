@@ -15,4 +15,6 @@ public interface AdminDao {
     public AdminModel loginByName(String username);
 
     public AdminCountDto count();
+
+    public AdminModel getAdminById(int id);
 }
