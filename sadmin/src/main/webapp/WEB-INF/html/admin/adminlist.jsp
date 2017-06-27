@@ -30,7 +30,7 @@
                 </h6>
             </th>
             <th colspan="1">
-                <c:if test="${'1' eq sessionScope.power}">
+                <c:if test="${'admin' eq sessionScope.username}">
                     <li class="btn"><a href="addadmin.do">新增用户</a></li>
                 </c:if>
             </th>

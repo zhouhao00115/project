@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by zhou.hao on 2017/6/27.
@@ -32,6 +35,17 @@ public class AdminController {
                               @RequestParam(value = "start", defaultValue = "0") String numberstart,
                               @RequestParam(value = "rows", defaultValue = "10") String numberrows,
                               @CookieValue(value = "cookierows", defaultValue = "10") String cookierows) {
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        if (!"admin".equals(session.getAttribute("username"))) {
+            mv.setViewName("admin");
+            mv.addObject("add", 3);
+            mv.addObject("view",3);
+            mv.addObject("info", "");
+            //标记返回的页面为列表页
+            mv.addObject("dto", adminService.getAdminById((int) session.getAttribute("id")));
+            return mv;
+        }
         int start;
         int rows;
         try {
@@ -55,7 +69,6 @@ public class AdminController {
                 e.printStackTrace();
             }
         }
-        ModelAndView mv = new ModelAndView();
         AdminDto dto = new AdminDto();
         dto.setList(adminService.getList(new AdminView(start, rows)));
         dto.setAdminCountDto(adminService.getCountAdmin());
@@ -77,22 +90,157 @@ public class AdminController {
     }
 
     @RequestMapping(value = "addadmin.do", method = RequestMethod.GET)
-    public ModelAndView datauserinfo(@RequestParam(value = "id", defaultValue = "0") String id) {
+    public ModelAndView datauserinfo(@RequestParam(value = "id", defaultValue = "") String id) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
+//        add = 1 表示添加 2 表示修改权限  3 表示修改密码
         mv.setViewName("admin");
-        if (StringUtil.isNullOrEmpty(id)) {
+        mv.addObject("view",3);
+        mv.addObject("info", "");
+        if (StringUtil.isNullOrEmpty(id) && "admin".equals(session.getAttribute("username"))) {
+            //管理员添加
             mv.addObject("dto", new AdminModel());
-            mv.addObject("view", 3);
-        } else {
+            mv.addObject("add", 1);
+            return mv;
+        }
+        if ("admin".equals(session.getAttribute("username"))) {
+            //管理员修改权限功能
             int number = 0;
-            try{
+            try {
                 number = Integer.parseInt(id);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             //标记返回的页面为列表页
+            mv.addObject("add", 2);
             mv.addObject("dto", adminService.getAdminById(number));
+            return mv;
         }
+        mv.addObject("add", 3);
+        //标记返回的页面为列表页
+        mv.addObject("dto", adminService.getAdminById((int) session.getAttribute("id")));
+        return mv;
+    }
+
+    /**
+     * 添加用户名和密码或者修改个人密码
+     *
+     * @param usarname
+     * @param newpassword
+     * @param newrepeatpassword
+     * @param power
+     * @return
+     */
+    @RequestMapping(value = "adddadminaction.do", method = RequestMethod.POST)
+    public ModelAndView addadmin(@RequestParam(value = "usarname", defaultValue = "0") String usarname,
+                                 @RequestParam(value = "newpassword", defaultValue = "") String newpassword,
+                                 @RequestParam(value = "newrepeatpassword", defaultValue = "") String newrepeatpassword,
+                                 @RequestParam(value = "power", defaultValue = "2") String power,
+                                 @RequestParam(value = "add", defaultValue = "1") String add) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin");
+        mv.addObject("view", 3);
+        if ("1".equals(add) && "admin".equals(session.getAttribute("username"))) {
+            //只有admin用户可以添加登陆名
+            mv.addObject("add",1);
+            if (StringUtil.isNullOrEmpty(usarname)) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "用户名不能为空");
+                return mv;
+            }
+            if (usarname.length() < 5) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "用户名长度不能小于5");
+                return mv;
+            }
+            AdminModel model = adminService.loginByName(usarname);
+            if (null == model || model.getId() == 0) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "用户名重复了");
+                return mv;
+            }
+            if (newpassword.length() < 6) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "密码不能小于6位数");
+                return mv;
+            }
+            if (!newpassword.equals(newrepeatpassword)) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "重复密码和新密码不一致");
+                return mv;
+            }
+            AdminModel adminModel = new AdminModel();
+            adminModel.setUsername(usarname);
+            adminModel.setPassword(newpassword);
+            if ("1".equals(power)) {
+                model.setPower(1);
+            } else {
+                adminModel.setPower(2);
+            }
+            AdminModel newAdmin = adminService.addAdminModel(adminModel);
+            if (null != newAdmin && newAdmin.getId() > 0) {
+                mv.addObject("dto", newAdmin);
+                mv.addObject("info", "成功");
+                return mv;
+            }
+            mv.addObject("dto", newAdmin);
+            mv.addObject("info", "添加失败");
+            return mv;
+        }
+        //修改权限
+        if ("2".equals(add) && "admin".equals(session.getAttribute("username"))) {
+            AdminModel adminModel = adminService.loginByName(usarname);
+            mv.addObject("add",2);
+            if (adminModel.getId() > 0) {
+                int p = 0;
+                try {
+                    p = Integer.parseInt(power);
+                    adminModel.setPower(p);
+                    mv.addObject("dto", adminService.changeAdminModel(adminModel));
+                    mv.addObject("info", "修改成功");
+                    return mv;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mv.addObject("dto", adminModel);
+                mv.addObject("info", "修改失败");
+                return mv;
+            }
+            mv.addObject("dto", new AdminDto());
+            mv.addObject("info", "用户不存在");
+            return mv;
+        }
+        //修改密码
+        mv.addObject("add",3);
+        if (usarname.equals(session.getAttribute("username"))) {
+            if (newpassword.length() < 6) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "密码不能小于6位数");
+                return mv;
+            }
+            if (!newpassword.equals(newrepeatpassword)) {
+                mv.addObject("dto", new AdminModel());
+                mv.addObject("info", "重复密码和新密码不一致");
+                return mv;
+            }
+            AdminModel adminModel = new AdminModel();
+            adminModel.setUsername(usarname);
+            adminModel.setPassword(newpassword);
+            AdminModel newAdmin = adminService.changeAdminModel(adminModel);
+            if (null != newAdmin && newAdmin.getId() > 0) {
+                mv.addObject("dto", newAdmin);
+                mv.addObject("info", "修改成功");
+                return mv;
+            }
+            mv.addObject("dto", newAdmin);
+            mv.addObject("info", "修改失败");
+            return mv;
+        }
+        mv.addObject("dto", new AdminModel());
+        mv.addObject("info", "对不起您权限不够，请联系管理员");
         return mv;
     }
 }

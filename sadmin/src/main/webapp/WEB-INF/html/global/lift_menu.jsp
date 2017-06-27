@@ -14,9 +14,13 @@
                     class="hidden-tablet"> 数据员管理</span></a></li>
             <li><a class="ajax-link" href="customer3.do"><i class="icon-briefcase"></i><span
                     class="hidden-tablet"> 货运订单</span></a></li>
-            <c:if test="${'1' eq sessionScope.power}">
+            <c:if test="${'admin' eq sessionScope.username}">
                 <li><a class="ajax-link" href="admin.do"><i class="icon-wrench"></i><span
                         class="hidden-tablet"> 权限管理</span></a></li>
+            </c:if>
+            <c:if test="${'1' ne sessionScope.power}">
+                <li><a class="ajax-link" href="addadmin.do?id=${sessionScope.id}"><i class="icon-wrench"></i><span
+                        class="hidden-tablet"> 用户管理</span></a></li>
             </c:if>
         </ul>
     </div>

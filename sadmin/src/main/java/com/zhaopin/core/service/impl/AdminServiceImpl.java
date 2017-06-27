@@ -48,4 +48,16 @@ public class AdminServiceImpl implements AdminService {
         }
         return dao.getAdminById(id);
     }
+
+    @Override
+    public AdminModel addAdminModel(AdminModel adminModel) {
+        System.out.println("添加成功");
+        return new AdminModel();
+    }
+
+    @Override
+    public AdminModel changeAdminModel(AdminModel adminModel) {
+        System.out.println("修改成功");
+        return new AdminModel();
+    }
 }

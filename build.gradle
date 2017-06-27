@@ -20,6 +20,7 @@ allprojects {
     targetCompatibility = 1.7
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
     ext {
+        gsonVersion = '2.2.2'
         springVersion = '3.2.3.RELEASE'
         springSecurityVersion = '3.1.4.RELEASE'
         jasrsVersion = '2.0'
@@ -60,6 +61,7 @@ allprojects {
 
     }
     dependencies {
+        compile "com.google.code.gson:gson:$gsonVersion"
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-expression:$springVersion"
         compile "org.springframework:spring-web:$springVersion"

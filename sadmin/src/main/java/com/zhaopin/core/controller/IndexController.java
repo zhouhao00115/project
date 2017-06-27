@@ -57,6 +57,7 @@ public class IndexController {
             return "login";
         }
         if (adminModel.getUsername().equals(username) && adminModel.getPassword().equals(password)) {
+            session.setAttribute("id", adminModel.getId());
             session.setAttribute("username", username);
             session.setAttribute("power", String.valueOf(adminModel.getPower()));
             return "index";

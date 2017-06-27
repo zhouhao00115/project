@@ -17,4 +17,8 @@ public interface AdminService {
     public List<AdminModel> getList(AdminView view);
 
     public AdminModel getAdminById(int id);
+
+    public AdminModel addAdminModel(AdminModel adminModel);
+
+    public AdminModel changeAdminModel(AdminModel adminModel);
 }
