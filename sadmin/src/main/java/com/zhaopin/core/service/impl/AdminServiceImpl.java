@@ -51,13 +51,17 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminModel addAdminModel(AdminModel adminModel) {
-        System.out.println("添加成功");
-        return new AdminModel();
+        if (StringUtil.isNullOrEmpty(adminModel.getUsername()) || adminModel.getPower() == 0 || StringUtil.isNullOrEmpty(adminModel.getPassword())) {
+            return adminModel;
+        }
+        return dao.addAdminModel(adminModel);
     }
 
     @Override
     public AdminModel changeAdminModel(AdminModel adminModel) {
-        System.out.println("修改成功");
-        return new AdminModel();
+        if (adminModel.getPower() == 0 && StringUtil.isNullOrEmpty(adminModel.getPassword())) {
+            return adminModel;
+        }
+        return dao.changeAdminModel(adminModel);
     }
 }

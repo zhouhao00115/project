@@ -17,4 +17,8 @@ public interface AdminDao {
     public AdminCountDto count();
 
     public AdminModel getAdminById(int id);
+
+    public AdminModel changeAdminModel(AdminModel model);
+
+    public AdminModel addAdminModel(AdminModel model);
 }

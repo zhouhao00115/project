@@ -6,6 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <form action="adddadminaction.do" method="POST">
+    <input id="username" name="username" type="hidden" class="form-control" value="${dto.username}">
     <table class="table table-hover">
         <thead>
         <tr>
@@ -21,67 +22,25 @@
             </tr>
         </c:if>
         <tr>
-            <td style='vertical-align: middle;'>用户名</td>
+            <td style='vertical-align: middle;'>新密码</td>
             <td>
-                <input id="username" name="username" type="text" class="form-control" placeholder="少于20个字"<c:if test="${'1' ne add}">readonly="true" </c:if> value="${dto.username}">
+                <input id="newpassword" name="newpassword" type="password" class="form-control" placeholder="新密码" value="">
             </td>
         </tr>
-        <c:if test="${'1' eq add}">
-            <tr>
-                <td style='vertical-align: middle;'>新密码</td>
-                <td>
-                    <input id="newpasswordadd" name="newpassword" type="password" class="form-control" placeholder="新密码" value="">
-                </td>
-            </tr>
-            <tr>
-                <td style='vertical-align: middle;'>重复新密码</td>
-                <td>
-                    <input id="newrepeatpasswordadd" name="newrepeatpassword" type="password" class="form-control" placeholder="重复新密码" value="">
-                </td>
-            </tr>
-            <tr>
-                <td style='vertical-align: middle;'>权限</td>
-                <td>
-                    <select class="form-control" id="poweradd" name="power">
-                        <option value="1" <c:if test="${'1' eq dto.power}">selected</c:if>>管理员</option>
-                        <option value="2" <c:if test="${'2' eq dto.power}">selected</c:if>>只读</option>
-                    </select>
-                </td>
-            </tr>
-        </c:if>
-        <c:if test="${'3' eq add}">
-            <tr>
-                <td style='vertical-align: middle;'>新密码</td>
-                <td>
-                    <input id="newpassword" name="newpassword" type="password" class="form-control" placeholder="新密码" value="">
-                </td>
-            </tr>
-            <tr>
-                <td style='vertical-align: middle;'>重复新密码</td>
-                <td>
-                    <input id="newrepeatpassword" name="newrepeatpassword" type="password" class="form-control" placeholder="重复新密码" value="">
-                </td>
-            </tr>
-        </c:if>
-        <c:if test="${'2' eq add}">
-            <tr>
-                <td style='vertical-align: middle;'>权限</td>
-                <td>
-                    <select class="form-control" id="power" name="power">
-                        <option value="1" <c:if test="${'1' eq dto.power}">selected</c:if>>管理员</option>
-                        <option value="2" <c:if test="${'2' eq dto.power}">selected</c:if>>只读</option>
-                    </select>
-                </td>
-            </tr>
-        </c:if>
+        <tr>
+            <td style='vertical-align: middle;'>重复新密码</td>
+            <td>
+                <input id="newrepeatpassword" name="newrepeatpassword" type="password" class="form-control" placeholder="重复新密码" value="">
+            </td>
+        </tr>
         <tr>
             <td colspan="2">
                 <li class="btn" data-toggle="modal" data-target="#change">提交</li>
             </td>
         </tr>
         </tbody>
-        woz
     </table>
+    <input type="hidden" id="add" name="add" value="3">
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
         <div class="modal-dialog">
@@ -98,8 +57,7 @@
                     确认提交？
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="submit" class="btn btn-primary">
                         提交更改
                     </button>

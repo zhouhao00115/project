@@ -4,8 +4,7 @@ import com.zhaopin.core.dto.admin.AdminCountDto;
 import com.zhaopin.core.dto.admin.AdminView;
 import com.zhaopin.core.mapper.provider.AdminProvider;
 import com.zhaopin.core.model.AdminModel;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -31,5 +30,13 @@ public interface AdminMapper {
     @Select("select count(*) from user where power=2")
     int countread();
 
+    @UpdateProvider(method = "updateAdmin", type = AdminProvider.class)
+    int changeAdminModel(AdminModel model);
+
+    @Insert("insert into user(id,username,password,power) values (#{id},#{username},#{password},#{power})")
+    int addAdminModel(AdminModel model);
+
+    @Select("select id from user order by id desc limit 0,1")
+    int maxId();
 
 }

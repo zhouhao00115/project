@@ -18,7 +18,7 @@
                 <li><a class="ajax-link" href="admin.do"><i class="icon-wrench"></i><span
                         class="hidden-tablet"> 权限管理</span></a></li>
             </c:if>
-            <c:if test="${'1' ne sessionScope.power}">
+            <c:if test="${'admin' ne sessionScope.username}">
                 <li><a class="ajax-link" href="addadmin.do?id=${sessionScope.id}"><i class="icon-wrench"></i><span
                         class="hidden-tablet"> 用户管理</span></a></li>
             </c:if>

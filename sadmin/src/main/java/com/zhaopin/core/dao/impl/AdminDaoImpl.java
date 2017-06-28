@@ -74,6 +74,50 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
+    public AdminModel changeAdminModel(AdminModel model) {
+        SqlSession session = sqlSessionFactory.openSession();
+        AdminModel adminModel = null;
+        try {
+            AdminMapper mapper = session.getMapper(AdminMapper.class);
+            mapper.changeAdminModel(model);
+            adminModel = mapper.loginByUsername(model.getUsername());
+            session.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            adminModel = new AdminModel();
+            adminModel.setUsername(model.getUsername());
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return adminModel;
+    }
+
+    @Override
+    public AdminModel addAdminModel(AdminModel model) {
+        SqlSession session = sqlSessionFactory.openSession();
+        AdminModel adminModel = null;
+        try {
+            AdminMapper mapper = session.getMapper(AdminMapper.class);
+            int id = mapper.maxId();
+            model.setId(id + 1);
+            int rows = mapper.addAdminModel(model);
+            if (rows > 0) {
+                adminModel = mapper.loginByUsername(model.getUsername());
+                session.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            adminModel = model;
+            session.rollback();
+        } finally {
+            session.close();
+        }
+        return adminModel;
+
+    }
+
+    @Override
     public AdminModel loginByName(String username) {
         SqlSession session = sqlSessionFactory.openSession();
         AdminModel adminModel = null;
@@ -82,6 +126,7 @@ public class AdminDaoImpl implements AdminDao {
             adminModel = mapper.loginByUsername(username);
         } catch (Exception e) {
             e.printStackTrace();
+            adminModel = new AdminModel();
         } finally {
             session.close();
         }

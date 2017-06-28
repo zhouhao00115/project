@@ -40,7 +40,7 @@ public class AdminController {
         if (!"admin".equals(session.getAttribute("username"))) {
             mv.setViewName("admin");
             mv.addObject("add", 3);
-            mv.addObject("view",3);
+            mv.addObject("view", 3);
             mv.addObject("info", "");
             //标记返回的页面为列表页
             mv.addObject("dto", adminService.getAdminById((int) session.getAttribute("id")));
@@ -96,7 +96,7 @@ public class AdminController {
         ModelAndView mv = new ModelAndView();
 //        add = 1 表示添加 2 表示修改权限  3 表示修改密码
         mv.setViewName("admin");
-        mv.addObject("view",3);
+        mv.addObject("view", 3);
         mv.addObject("info", "");
         if (StringUtil.isNullOrEmpty(id) && "admin".equals(session.getAttribute("username"))) {
             //管理员添加
@@ -126,14 +126,14 @@ public class AdminController {
     /**
      * 添加用户名和密码或者修改个人密码
      *
-     * @param usarname
+     * @param username
      * @param newpassword
      * @param newrepeatpassword
      * @param power
      * @return
      */
     @RequestMapping(value = "adddadminaction.do", method = RequestMethod.POST)
-    public ModelAndView addadmin(@RequestParam(value = "usarname", defaultValue = "0") String usarname,
+    public ModelAndView addadmin(@RequestParam(value = "username", defaultValue = "0") String username,
                                  @RequestParam(value = "newpassword", defaultValue = "") String newpassword,
                                  @RequestParam(value = "newrepeatpassword", defaultValue = "") String newrepeatpassword,
                                  @RequestParam(value = "power", defaultValue = "2") String power,
@@ -145,19 +145,19 @@ public class AdminController {
         mv.addObject("view", 3);
         if ("1".equals(add) && "admin".equals(session.getAttribute("username"))) {
             //只有admin用户可以添加登陆名
-            mv.addObject("add",1);
-            if (StringUtil.isNullOrEmpty(usarname)) {
+            mv.addObject("add", 1);
+            if (StringUtil.isNullOrEmpty(username)) {
                 mv.addObject("dto", new AdminModel());
                 mv.addObject("info", "用户名不能为空");
                 return mv;
             }
-            if (usarname.length() < 5) {
+            if (username.length() < 5) {
                 mv.addObject("dto", new AdminModel());
-                mv.addObject("info", "用户名长度不能小于5");
+                mv.addObject("info", "用户名长度不能小于6");
                 return mv;
             }
-            AdminModel model = adminService.loginByName(usarname);
-            if (null == model || model.getId() == 0) {
+            AdminModel model = adminService.loginByName(username);
+            if (null != model && model.getId() != 0) {
                 mv.addObject("dto", new AdminModel());
                 mv.addObject("info", "用户名重复了");
                 return mv;
@@ -172,18 +172,19 @@ public class AdminController {
                 mv.addObject("info", "重复密码和新密码不一致");
                 return mv;
             }
-            AdminModel adminModel = new AdminModel();
-            adminModel.setUsername(usarname);
-            adminModel.setPassword(newpassword);
+            model = new AdminModel();
+            model.setUsername(username);
+            model.setPassword(newpassword);
             if ("1".equals(power)) {
                 model.setPower(1);
             } else {
-                adminModel.setPower(2);
+                model.setPower(2);
             }
-            AdminModel newAdmin = adminService.addAdminModel(adminModel);
+            AdminModel newAdmin = adminService.addAdminModel(model);
             if (null != newAdmin && newAdmin.getId() > 0) {
                 mv.addObject("dto", newAdmin);
                 mv.addObject("info", "成功");
+                mv.addObject("add", 2);
                 return mv;
             }
             mv.addObject("dto", newAdmin);
@@ -192,10 +193,10 @@ public class AdminController {
         }
         //修改权限
         if ("2".equals(add) && "admin".equals(session.getAttribute("username"))) {
-            AdminModel adminModel = adminService.loginByName(usarname);
-            mv.addObject("add",2);
+            AdminModel adminModel = adminService.loginByName(username);
+            mv.addObject("add", 2);
             if (adminModel.getId() > 0) {
-                int p = 0;
+                int p;
                 try {
                     p = Integer.parseInt(power);
                     adminModel.setPower(p);
@@ -209,25 +210,30 @@ public class AdminController {
                 mv.addObject("info", "修改失败");
                 return mv;
             }
-            mv.addObject("dto", new AdminDto());
+            adminModel.setUsername(username);
+            mv.addObject("dto", adminModel);
             mv.addObject("info", "用户不存在");
             return mv;
         }
         //修改密码
-        mv.addObject("add",3);
-        if (usarname.equals(session.getAttribute("username"))) {
+        mv.addObject("add", 3);
+        if (username.equals(session.getAttribute("username"))) {
             if (newpassword.length() < 6) {
-                mv.addObject("dto", new AdminModel());
+                AdminModel model = new AdminModel();
+                model.setUsername(username);
+                mv.addObject("dto", model);
                 mv.addObject("info", "密码不能小于6位数");
                 return mv;
             }
             if (!newpassword.equals(newrepeatpassword)) {
-                mv.addObject("dto", new AdminModel());
+                AdminModel model = new AdminModel();
+                model.setUsername(username);
+                mv.addObject("dto", model);
                 mv.addObject("info", "重复密码和新密码不一致");
                 return mv;
             }
             AdminModel adminModel = new AdminModel();
-            adminModel.setUsername(usarname);
+            adminModel.setUsername(username);
             adminModel.setPassword(newpassword);
             AdminModel newAdmin = adminService.changeAdminModel(adminModel);
             if (null != newAdmin && newAdmin.getId() > 0) {
