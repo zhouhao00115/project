@@ -5,16 +5,6 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-
-<c:if test="${'1' eq add}">
-    <jsp:include page="admin/adminlist.jsp"></jsp:include>
-</c:if>
-<c:if test="${'2' eq add}">
-    <jsp:include page="admin/adminadd.jsp"></jsp:include>
-</c:if>
-<c:if test="${'3' eq add}">
-    <jsp:include page="admin/adminadd.jsp"></jsp:include>
-</c:if>
 <form action="adddadminaction.do" method="POST">
     <table class="table table-hover">
         <thead>

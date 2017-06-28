@@ -17,19 +17,26 @@
 		<div class="row-fluid">
 				
 			<jsp:include page="global/lift_menu.jsp"></jsp:include>
-			
-			<div id="content" class="span10">
 			<!-- content starts -->
+			<div id="content" class="span10">
+				<div>
+					<ul class="breadcrumb">
+						<li>
+							<a href="<%=basePath%>index.do">首页</a> <span class="divider">/</span>
+						</li>
+						<li>
+							<a href="<%=basePath%>index.do">首页</a>
+						</li>
+					</ul>
+				</div>
 
-			<div>
-				<ul class="breadcrumb">
-					<li>
-						<a href="<%=basePath%>index.do">首页</a> <span class="divider">/</span>
-					</li>
-					<li>
-						<a href="<%=basePath%>index.do">首页</a>
-					</li>
-				</ul>
+				<div class="row-fluid sortable">
+					<div class="box span12">
+						<div class="box-content" id="indexmap">
+								<jsp:include page="index/indexMap.jsp"></jsp:include>
+						</div>
+					</div>
+				</div>
 			</div>
             <!-- content ends -->
                 <div class="modal hide fade" id="myModal">
@@ -51,7 +58,6 @@
 		<jsp:include page="global/foot.jsp"></jsp:include>
 
 	</div><!--/.fluid-container-->
-
 	<!-- external javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
