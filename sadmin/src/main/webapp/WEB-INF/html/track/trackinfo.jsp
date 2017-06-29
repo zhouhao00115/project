@@ -18,9 +18,9 @@
                 </c:if>
             </th>
             <th>
-                <c:if test="${'1' eq sessionScope.power}">
-                    <li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>
-                </c:if>
+                <%--<c:if test="${'1' eq sessionScope.power}">--%>
+                    <%--<li class="btn" data-toggle="modal" data-target="#delete">删除该条</li>--%>
+                <%--</c:if>--%>
             </th>
         </tr>
         </thead>
