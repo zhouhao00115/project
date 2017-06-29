@@ -109,6 +109,15 @@ public class DataUserController {
         return mv;
     }
 
+    @RequestMapping(value = "adddatauseraction.do", method = RequestMethod.GET)
+    public ModelAndView addaction() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("datauser");
+        mv.addObject("view", 2);
+        mv.addObject("dto", new DataUserModel());
+        return mv;
+    }
+
     @RequestMapping(value = "datauserinfo.do", method = RequestMethod.GET)
     public ModelAndView datauserinfo(@RequestParam(value = "staffid", defaultValue = "") String staffid) {
         ModelAndView mv = new ModelAndView();

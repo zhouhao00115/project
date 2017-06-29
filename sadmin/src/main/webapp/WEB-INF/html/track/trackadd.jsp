@@ -19,14 +19,12 @@
         </tr>
         </thead>
         <tbody>
-        <%--private int tid;--%>
-        <%--private String license;--%>
-        <%--private String tname;--%>
-        <%--private String tphone;--%>
-        <%--private String ttype;--%>
-        <%--private int capacity;--%>
-        <%--private String citys;--%>
-        <%--private String remarks;--%>
+        <c:if test="${'' ne info}">
+            <tr>
+                <td style='vertical-align: middle;'>提示</td>
+                <td>${info}</td>
+            </tr>
+        </c:if>
         <tr>
             <td style='vertical-align: middle;'>车牌</td>
             <td>
@@ -76,7 +74,7 @@
         </tr>
         </tbody>
     </table>
-    <input type="hidden" id="staffid" name="staffid" value="${dto.tid}">
+    <input type="hidden" id="tid" name="tid" value="${dto.tid}">
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
         <div class="modal-dialog">

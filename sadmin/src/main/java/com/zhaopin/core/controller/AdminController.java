@@ -123,6 +123,17 @@ public class AdminController {
         return mv;
     }
 
+    @RequestMapping(value = "adddadminaction.do", method = RequestMethod.GET)
+    public ModelAndView addadmin() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin");
+        mv.addObject("view", 3);
+        mv.addObject("info", "");
+        mv.addObject("dto", new AdminModel());
+        mv.addObject("add", 1);
+        return mv;
+    }
+
     /**
      * 添加用户名和密码或者修改个人密码
      *

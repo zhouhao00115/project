@@ -27,7 +27,7 @@ public interface TrackMapper {
     @Select("select tid,license,tname,tphone,ttype,capacity,citys,remarks from truck where tid=#{tid} order by tid desc limit 1 offset 0")
     TrackModel getTrackById(int tid);
 
-    @Select("select tid from truck order by truck desc limit 1 offset 0")
+    @Select("select tid from truck order by tid desc limit 1 offset 0")
     int getLastId();
 
     @Insert("insert into truck (tid,license,tname,tphone,ttype,capacity,citys,remarks) values (#{tid},#{license},#{tname},#{tphone},#{ttype},#{capacity},#{citys},#{remarks})")

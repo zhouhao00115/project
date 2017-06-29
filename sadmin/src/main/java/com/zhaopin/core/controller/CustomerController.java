@@ -64,13 +64,13 @@ public class CustomerController {
         CustomerDto dto = new CustomerDto();
         dto.setCount(service.getCountCustomer());
         dto.setList(list);
-        dto.setPage(start/rows+1);
+        dto.setPage(start / rows + 1);
         dto.setStart(start);
         dto.setRows(rows);
         if (dto.getCount() > rows) {
-            if(dto.getCount() % rows == 0){
-                dto.setEnd((dto.getCount() / rows) * rows-rows);
-            }else {
+            if (dto.getCount() % rows == 0) {
+                dto.setEnd((dto.getCount() / rows) * rows - rows);
+            } else {
                 dto.setEnd((dto.getCount() / rows) * rows);
             }
         }
@@ -104,6 +104,17 @@ public class CustomerController {
         }
         CustomerModel model = service.getModelById(new CustomerView(cid));
         mv.addObject("dto", model);
+        return mv;
+    }
+
+    @RequestMapping(value = "addcustomer.do", method = RequestMethod.GET)
+    public ModelAndView customeraddaction() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("customer");
+        //标记返回的页面为列表页
+        mv.addObject("view", 3);
+        mv.addObject("datauser", dataUserService.allUser());
+        mv.addObject("dto", new CustomerModel());
         return mv;
     }
 

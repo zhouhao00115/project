@@ -57,7 +57,7 @@
                     </td>
                     <td></td>
                     <td ></td>
-                    <td class="center"><h5><small><a href="addadmin.do?id=${data.id}">查看</a></small></h5></td>
+                    <td class="center"><h5><small><a href="addadmin.do?id=${data.id}">修改权限</a></small></h5></td>
                 </tr>
             </c:forEach>
         </tbody>
