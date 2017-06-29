@@ -10,11 +10,11 @@
         <thead>
         <tr>
             <th colspan="2">
-                <li class="btn"><a href="datauser.do">返回</a></li>
+                <li class="btn"><a href="track.do">返回</a></li>
             </th>
             <th>
                 <c:if test="${'1' eq sessionScope.power}">
-                    <a href="adddatauser.do?staffid=${dto.staffid}">修改数据员信息</a>
+                    <a href="addtrack.do?tid=${dto.tid}">修改货车信息</a>
                 </c:if>
             </th>
             <th>
@@ -27,34 +27,48 @@
         <tbody>
         <tr>
             <td class="center" width="170">编号</td>
-            <td class="center" id="staffid">${dto.staffid}</td>
+            <td class="center">${dto.tid}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">数据员</td>
-            <td class="center" id="name">${dto.sname}</td>
+            <td class="center">车牌号</td>
+            <td class="center">${dto.license}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">车主姓名</td>
+            <td class="center">${dto.tname}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td class="center">电话</td>
-            <td class="center" id="sphone">${dto.sphone}</td>
+            <td class="center">${dto.tphone}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">性别</td>
-            <td class="center" id="gender">
-                <c:if test="${'1' eq dto.gender}">男</c:if>
-                <c:if test="${'2' eq dto.gender}">女</c:if>
-            </td>
+            <td class="center">货车类型</td>
+            <td class="center">${dto.ttype}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
+            <td class="center">载货量(吨)</td>
+            <td class="center">${dto.capacity}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">车主期望城市</td>
+            <td class="center">${dto.citys}</td>
+            <td></td>
+            <td></td>
+        </tr><tr>
             <td class="center">备注</td>
-            <td class="center" id="remarks">${dto.remarks}</td>
+            <td class="center">${dto.remarks}</td>
             <td></td>
             <td></td>
         </tr>

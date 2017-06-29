@@ -8,7 +8,7 @@
             <li class="nav-header hidden-tablet ">Main</li>
             <li><a class="ajax-link" href="customer.do"><i class="icon-home"></i><span
                     class="hidden-tablet"> 牧场管理</span></a></li>
-            <li><a class="ajax-link" href="customer1.do"><i class="icon-plane"></i><span
+            <li><a class="ajax-link" href="track.do"><i class="icon-plane"></i><span
                     class="hidden-tablet"> 货车管理</span></a></li>
             <li><a class="ajax-link" href="datauser.do"><i class="icon-user"></i><span
                     class="hidden-tablet"> 数据员管理</span></a></li>

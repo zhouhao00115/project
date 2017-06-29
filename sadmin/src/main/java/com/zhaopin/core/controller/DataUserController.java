@@ -73,7 +73,6 @@ public class DataUserController {
                 dataUserDto.setEnd((dataUserDto.getCount() / rows) * rows);
             }
         }
-        dataUserDto.setCount(dataUserService.count());
         mv.addObject("dto", dataUserDto);
         mv.addObject("view", 1);
         return mv;
