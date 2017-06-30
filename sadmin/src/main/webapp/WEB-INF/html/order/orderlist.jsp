@@ -52,7 +52,7 @@
         <c:forEach items="${dto.list}" var="data" varStatus="i">
             <tr>
                 <td class="center">${data.oid}</td>
-                <td class="center">${data.customerModel.cname}</td>
+                <td class="center">${data.customerModel.name}</td>
                 <td class="center">${data.trackModel.license}</td>
                 <td class="center">${data.dataUserModel.sname}</td>
                 <td class="center">${data.volume}</td>

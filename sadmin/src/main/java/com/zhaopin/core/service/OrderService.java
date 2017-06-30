@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderService {
     public List<OrderModel> query(OrderView view);
 
-    public OrderModel getDataUserById(String oid);
+    public OrderModel getOrderById(String oid);
 
     public int count();
 

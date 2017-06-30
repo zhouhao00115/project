@@ -35,7 +35,9 @@ public interface OrderMapper {
     })
     OrderModel getModelById(int oid);
 
+    @Insert("insert into orders (oid,cid,tid,staffid,volume,price,total,createtime,remarks) values (#{oid},#{customerModel.cid},#{trackModel.tid},#{dataUserModel.staffid},#{volume},#{price},#{total},#{createtime},#{remarks})")
     int addOrders(OrderModel model);
 
+    @Update("update orders set cid=#{customerModel.cid},tid=#{trackModel.tid},staffid=#{dataUserModel.staffid},volume=#{volume},price=#{price},total=#{total},remarks=#{remarks} where oid=#{oid}")
     int updateOrders(OrderModel model);
 }

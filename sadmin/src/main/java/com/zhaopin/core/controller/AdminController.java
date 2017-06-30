@@ -112,6 +112,12 @@ public class AdminController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            if(number == (int) session.getAttribute("id")){
+                mv.addObject("add", 3);
+                //标记返回的页面为列表页
+                mv.addObject("dto", adminService.getAdminById((int) session.getAttribute("id")));
+                return mv;
+            }
             //标记返回的页面为列表页
             mv.addObject("add", 2);
             mv.addObject("dto", adminService.getAdminById(number));

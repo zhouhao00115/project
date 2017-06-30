@@ -57,7 +57,12 @@
                     </td>
                     <td></td>
                     <td ></td>
-                    <td class="center"><h5><small><a href="addadmin.do?id=${data.id}">修改权限</a></small></h5></td>
+                    <c:if test="${data.username eq sessionScope.username}">
+                        <td class="center"><h5><small><a href="addadmin.do?id=${data.id}">修改密码</a></small></h5></td>
+                    </c:if>
+                    <c:if test="${data.username ne sessionScope.username}">
+                        <td class="center"><h5><small><a href="addadmin.do?id=${data.id}">修改权限</a></small></h5></td>
+                    </c:if>
                 </tr>
             </c:forEach>
         </tbody>

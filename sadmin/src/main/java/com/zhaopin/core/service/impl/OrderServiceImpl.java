@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderModel getDataUserById(String oid) {
+    public OrderModel getOrderById(String oid) {
         int number = 0;
         try {
             number = Integer.parseInt(oid);

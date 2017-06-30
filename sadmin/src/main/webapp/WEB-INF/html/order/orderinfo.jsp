@@ -10,11 +10,11 @@
         <thead>
         <tr>
             <th colspan="2">
-                <li class="btn"><a href="track.do">返回</a></li>
+                <li class="btn"><a href="order.do">返回</a></li>
             </th>
             <th>
                 <c:if test="${'1' eq sessionScope.power}">
-                    <a href="addtrack.do?tid=${dto.tid}">修改货车信息</a>
+                    <a href="addorder.do?oid=${dto.oid}">修改订单信息</a>
                 </c:if>
             </th>
             <th>
@@ -26,48 +26,127 @@
         </thead>
         <tbody>
         <tr>
-            <td class="center" width="170">编号</td>
-            <td class="center">${dto.tid}</td>
+            <td class="center" width="170">订单编号</td>
+            <td class="center">${dto.oid}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center" width="170">发货量（吨）</td>
+            <td class="center">${dto.volume}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center" width="170">单价(元/吨)</td>
+            <td class="center">${dto.price}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center" width="170">总价</td>
+            <td class="center">${dto.total}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">牧场编号</td>
+            <td class="center">${dto.customerModel.cid}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">牧场名称</td>
+            <td class="center">${dto.customerModel.name}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">牧场主</td>
+            <td class="center">${dto.customerModel.cname}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">牧场电话</td>
+            <td class="center">${dto.customerModel.cphone}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">牧场规模</td>
+            <td class="center">${dto.customerModel.scale}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">月使用量（吨/月）</td>
+            <td class="center">${dto.customerModel.used}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">库存剩余量</td>
+            <td class="center">${dto.customerModel.left}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">货车编号</td>
+            <td class="center">${dto.trackModel.tid}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
             <td class="center">车牌号</td>
-            <td class="center">${dto.license}</td>
+            <td class="center">${dto.trackModel.license}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">车主姓名</td>
-            <td class="center">${dto.tname}</td>
+            <td class="center">车主</td>
+            <td class="center">${dto.trackModel.tname}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">电话</td>
-            <td class="center">${dto.tphone}</td>
+            <td class="center">车主电话</td>
+            <td class="center">${dto.trackModel.tphone}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">货车类型</td>
-            <td class="center">${dto.ttype}</td>
+            <td class="center">车型</td>
+            <td class="center">${dto.trackModel.ttype}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">载货量(吨)</td>
-            <td class="center">${dto.capacity}</td>
+            <td class="center">容量(吨)</td>
+            <td class="center">${dto.trackModel.capacity}</td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td class="center">车主期望城市</td>
-            <td class="center">${dto.citys}</td>
+            <td class="center">数据员编号</td>
+            <td class="center">${dto.dataUserModel.staffid}</td>
             <td></td>
             <td></td>
-        </tr><tr>
-            <td class="center">备注</td>
+        </tr>
+        <tr>
+            <td class="center">数据员姓名</td>
+            <td class="center">${dto.dataUserModel.sname}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center">数据员电话</td>
+            <td class="center">${dto.dataUserModel.sphone}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="center" width="170">备注</td>
             <td class="center">${dto.remarks}</td>
             <td></td>
             <td></td>

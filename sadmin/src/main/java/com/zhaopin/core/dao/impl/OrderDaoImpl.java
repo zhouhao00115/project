@@ -3,8 +3,11 @@ package com.zhaopin.core.dao.impl;
 import com.zhaopin.core.dao.OrderDao;
 import com.zhaopin.core.dbutil.DBFactory;
 import com.zhaopin.core.dto.order.OrderView;
+import com.zhaopin.core.mapper.CustomerMapper;
 import com.zhaopin.core.mapper.OrderMapper;
+import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.model.OrderModel;
+import com.zhaopin.core.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -69,13 +72,21 @@ public class OrderDaoImpl implements OrderDao {
         OrderModel orderModel = null;
         try {
             OrderMapper mapper = session.getMapper(OrderMapper.class);
+            CustomerMapper customerMapper = session.getMapper(CustomerMapper.class);
             int id = mapper.getLastId();
-            if (id > 0) {
+            if (id >= 0) {
                 model.setOid(id + 1);
                 int rows = mapper.addOrders(model);
                 if (rows > 0) {
                     orderModel = mapper.getModelById(model.getOid());
-                    session.commit();
+                    CustomerModel customerModel = customerMapper.getCustomerById(orderModel.getCustomerModel().getCid());
+                    if(!StringUtil.isNullOrEmpty(customerModel.getCid())){
+                        customerModel.setLeft(customerModel.getLeft()+orderModel.getVolume());
+                        int urows = customerMapper.updateCustomer(customerModel);
+                        if(urows>0){
+                            session.commit();
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
@@ -99,9 +110,11 @@ public class OrderDaoImpl implements OrderDao {
             int rows = mapper.updateOrders(model);
             if(rows>0){
                 orderModel = mapper.getModelById(model.getOid());
+                session.commit();
             }
         } catch (Exception e) {
             e.printStackTrace();
+            session.rollback();
         } finally {
             session.close();
         }

@@ -49,6 +49,9 @@
                         <c:if test="${'1' eq view}">
                             <jsp:include page="order/orderlist.jsp"></jsp:include>
                         </c:if>
+                        <c:if test="${'2' eq view}">
+                            <jsp:include page="order/orderinfo.jsp"></jsp:include>
+                        </c:if>
                         <c:if test="${'3' eq view}">
                             <jsp:include page="order/orderadd.jsp"></jsp:include>
                         </c:if>

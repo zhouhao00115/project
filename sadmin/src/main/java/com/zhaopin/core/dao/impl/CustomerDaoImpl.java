@@ -43,6 +43,7 @@ public class CustomerDaoImpl implements CustomerDao {
             customerModel = mapper.getCustomerById(customerId);
         } catch (Exception e) {
             e.printStackTrace();
+            customerModel = new CustomerModel();
         } finally {
             session.close();
         }
