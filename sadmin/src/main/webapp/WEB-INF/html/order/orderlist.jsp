@@ -9,10 +9,10 @@
     <table class="table">
         <thead>
         <tr>
-            <th colspan="2">
+            <th colspan="6">
                 总计 ${dto.count} 条
             </th>
-            <th colspan="3">
+            <th colspan="2">
                 <h6>每页显示
                     <small>
                         <a href="order.do?rows=10">10</a>
@@ -29,7 +29,7 @@
                     条
                 </h6>
             </th>
-            <th colspan="1">
+            <th colspan="2">
                 <c:if test="${'1' eq sessionScope.power}">
                     <li class="btn"><a href="addorder.do">新增货运订单</a></li>
                 </c:if>

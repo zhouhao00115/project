@@ -107,10 +107,19 @@ public class OrderDaoImpl implements OrderDao {
         OrderModel orderModel = null;
         try {
             OrderMapper mapper = session.getMapper(OrderMapper.class);
+            OrderModel beforeChange = mapper.getModelById(model.getOid());
+            CustomerMapper customerMapper = session.getMapper(CustomerMapper.class);
             int rows = mapper.updateOrders(model);
             if(rows>0){
                 orderModel = mapper.getModelById(model.getOid());
-                session.commit();
+                CustomerModel customerModel = customerMapper.getCustomerById(orderModel.getCustomerModel().getCid());
+                if(!StringUtil.isNullOrEmpty(customerModel.getCid())){
+                    customerModel.setLeft(customerModel.getLeft()+model.getVolume()-beforeChange.getVolume());
+                    int urows = customerMapper.updateCustomer(customerModel);
+                    if(urows>0){
+                        session.commit();
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
