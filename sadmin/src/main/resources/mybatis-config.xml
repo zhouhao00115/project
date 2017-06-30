@@ -18,7 +18,7 @@
         <setting name="localCacheScope" value="SESSION"/>
         <setting name="jdbcTypeForNull" value="OTHER"/>
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
-        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <environments default="sqlite">
         <environment id="sqlite">
@@ -32,9 +32,10 @@
         </environment>
     </environments>
     <mappers>
-        <mapper class="com.zhaopin.core.mapper.CustomerMapper" />
-        <mapper class="com.zhaopin.core.mapper.AdminMapper" />
+        <mapper class="com.zhaopin.core.mapper.CustomerMapper"/>
+        <mapper class="com.zhaopin.core.mapper.AdminMapper"/>
         <mapper class="com.zhaopin.core.mapper.DataUserMapper"/>
         <mapper class="com.zhaopin.core.mapper.TrackMapper"/>
+        <mapper class="com.zhaopin.core.mapper.OrderMapper"/>
     </mappers>
 </configuration>

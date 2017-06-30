@@ -34,6 +34,5 @@
 --oid:订单id，cid：牧场id，tid:货车id,staffid：数据员id,volume：发货量（吨），price：单价（元），total：总价（元），createtime：创建时间，remarks：备注
 --user:用户登陆信息表
 --id:登陆用户id，username：用户名，password：密码，power：权限 1、超级管理员，2、普通管理员，3、只读权限
-
 --select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, t1.staffid ,remarks  from customer as t1,
 --(select * from staff) as t2 where t1.staffid=t2.staffid order by cid desc limit 1 offset 0;
