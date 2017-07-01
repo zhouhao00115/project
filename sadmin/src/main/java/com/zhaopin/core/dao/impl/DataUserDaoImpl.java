@@ -85,7 +85,13 @@ public class DataUserDaoImpl implements DataUserDao {
         DataUserModel returnModel = null;
         try {
             DataUserMapper mapper = session.getMapper(DataUserMapper.class);
-            int id = mapper.getLastId();
+            int count = mapper.count();
+            int id;
+            if (count > 0) {
+                id = mapper.getLastId();
+            } else {
+                id = 0;
+            }
             id += 1;
             model.setStaffid(id);
             int rows = mapper.addDataUser(model);

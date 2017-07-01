@@ -77,7 +77,13 @@ public class TrackDaoImpl implements TrackDao {
         TrackModel returnModel = null;
         try {
             TrackMapper mapper = session.getMapper(TrackMapper.class);
-            int id = mapper.getLastId();
+            int count = mapper.count();
+            int id;
+            if(count>0){
+                id = mapper.getLastId();
+            }else {
+                id = 0;
+            }
             id += 1;
             model.setTid(id);
             int rows = mapper.addTrack(model);

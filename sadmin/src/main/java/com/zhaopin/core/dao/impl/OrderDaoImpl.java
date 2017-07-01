@@ -73,17 +73,23 @@ public class OrderDaoImpl implements OrderDao {
         try {
             OrderMapper mapper = session.getMapper(OrderMapper.class);
             CustomerMapper customerMapper = session.getMapper(CustomerMapper.class);
-            int id = mapper.getLastId();
+            int count = mapper.count();
+            int id;
+            if (count > 0) {
+                id = mapper.getLastId();
+            } else {
+                id = 0;
+            }
             if (id >= 0) {
                 model.setOid(id + 1);
                 int rows = mapper.addOrders(model);
                 if (rows > 0) {
                     orderModel = mapper.getModelById(model.getOid());
                     CustomerModel customerModel = customerMapper.getCustomerById(orderModel.getCustomerModel().getCid());
-                    if(!StringUtil.isNullOrEmpty(customerModel.getCid())){
-                        customerModel.setLeft(customerModel.getLeft()+orderModel.getVolume());
+                    if (!StringUtil.isNullOrEmpty(customerModel.getCid())) {
+                        customerModel.setLeft(customerModel.getLeft() + orderModel.getVolume());
                         int urows = customerMapper.updateCustomer(customerModel);
-                        if(urows>0){
+                        if (urows > 0) {
                             session.commit();
                         }
                     }
@@ -110,13 +116,13 @@ public class OrderDaoImpl implements OrderDao {
             OrderModel beforeChange = mapper.getModelById(model.getOid());
             CustomerMapper customerMapper = session.getMapper(CustomerMapper.class);
             int rows = mapper.updateOrders(model);
-            if(rows>0){
+            if (rows > 0) {
                 orderModel = mapper.getModelById(model.getOid());
                 CustomerModel customerModel = customerMapper.getCustomerById(orderModel.getCustomerModel().getCid());
-                if(!StringUtil.isNullOrEmpty(customerModel.getCid())){
-                    customerModel.setLeft(customerModel.getLeft()+model.getVolume()-beforeChange.getVolume());
+                if (!StringUtil.isNullOrEmpty(customerModel.getCid())) {
+                    customerModel.setLeft(customerModel.getLeft() + model.getVolume() - beforeChange.getVolume());
                     int urows = customerMapper.updateCustomer(customerModel);
-                    if(urows>0){
+                    if (urows > 0) {
                         session.commit();
                     }
                 }

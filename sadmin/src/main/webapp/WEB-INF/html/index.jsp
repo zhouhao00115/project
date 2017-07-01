@@ -33,7 +33,7 @@
 				<div class="row-fluid sortable">
 					<div class="box span12">
 						<div class="box-content" id="indexmap">
-
+                            <jsp:include page="index/indexMap.jsp"/>
 						</div>
 					</div>
 				</div>

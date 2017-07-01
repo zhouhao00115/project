@@ -36,3 +36,11 @@
 --id:登陆用户id，username：用户名，password：密码，power：权限 1、超级管理员，2、普通管理员，3、只读权限
 --select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, t1.staffid ,remarks  from customer as t1,
 --(select * from staff) as t2 where t1.staffid=t2.staffid order by cid desc limit 1 offset 0;
+delete from truck where tid =0
+--delete from orders where oid=0
+--delete from staff where staffid=0
+--delete from customer where cid=HS0000
+--insert into customer(cid) values ('HS0000');
+--insert into truck(tid)values ('0');
+--insert into staff(staffid) values ('0');
+--insert into orders (oid)values ('0')

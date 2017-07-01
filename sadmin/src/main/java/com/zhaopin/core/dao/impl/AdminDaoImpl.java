@@ -99,7 +99,13 @@ public class AdminDaoImpl implements AdminDao {
         AdminModel adminModel = null;
         try {
             AdminMapper mapper = session.getMapper(AdminMapper.class);
-            int id = mapper.maxId();
+            int count = mapper.countAll();
+            int id;
+            if (count > 0) {
+                id = mapper.maxId();
+            }else {
+                id = 0;
+            }
             model.setId(id + 1);
             int rows = mapper.addAdminModel(model);
             if (rows > 0) {

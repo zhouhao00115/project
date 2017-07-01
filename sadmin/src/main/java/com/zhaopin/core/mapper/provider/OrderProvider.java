@@ -8,7 +8,7 @@ import com.zhaopin.core.dto.order.OrderView;
 public class OrderProvider {
     public String getQuerySql(OrderView view) {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("select oid,cid,tid,staffid,volume,price,total,createtime,remarks from orders");
+        buffer.append("select oid,cid,tid,staffid,volume,price,total,createtime,remarks from orders where oid>0");
         if (view.getRows() < 1 || view.getRows() > 100) {
             view.setRows(10);
         }

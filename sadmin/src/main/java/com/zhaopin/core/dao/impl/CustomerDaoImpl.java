@@ -56,8 +56,14 @@ public class CustomerDaoImpl implements CustomerDao {
         CustomerModel returnModel = null;
         try {
             CustomerMapper mapper = session.getMapper(CustomerMapper.class);
-            String lastId = mapper.getLastId();
-            int id = Integer.parseInt(lastId.substring(2, lastId.length()));
+            int count = mapper.count();
+            int id;
+            if (count > 0) {
+                String lastId = mapper.getLastId();
+                id = Integer.parseInt(lastId.substring(2, lastId.length()));
+            } else {
+                id = 0;
+            }
             id += 1;
             model.setCid("HS" + StringUtil.frontCompWithZore(id, 5));
             int rows = mapper.addCustomer(model);
