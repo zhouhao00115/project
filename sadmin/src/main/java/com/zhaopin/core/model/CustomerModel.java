@@ -15,8 +15,10 @@ public class CustomerModel {
     private String scale;
     private int used;
     private int left;
-    //库存状态
+    //库存状态 0、状态未知 1、库存充足 2、正常库存 3、严重缺少
     private int staus;
+    //状态描述
+    private String stausdes;
     private String road;
     private int price;
     private double longitude;
@@ -186,6 +188,15 @@ public class CustomerModel {
     public void setStaus(int staus) {
         this.staus = staus;
     }
+
+    public String getStausdes() {
+        return stausdes;
+    }
+
+    public void setStausdes(String stausdes) {
+        this.stausdes = stausdes;
+    }
+
     //    private String id;
 //    private String name;
 //    private String city;

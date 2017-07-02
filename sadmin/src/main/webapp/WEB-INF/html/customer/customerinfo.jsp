@@ -104,6 +104,24 @@
             <td></td>
         </tr>
         <tr>
+            <td class="center">状态</td>
+            <td class="center" id="staus">
+                <c:if test="${'0'eq customer.staus}">
+                    未知
+                </c:if>
+                <c:if test="${'1'eq customer.staus}">
+                    充足
+                </c:if>
+                <c:if test="${'2'eq customer.staus}">
+                    正常
+                </c:if>
+                <c:if test="${'3'eq customer.staus}">
+                    缺少
+                </c:if></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
             <td class="center">数据员</td>
             <td class="center" id="data">${dto.sname}</td>
             <td></td>

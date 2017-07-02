@@ -17,8 +17,19 @@
     map.plugin(["AMap.ToolBar"], function () {
         map.addControl(new AMap.ToolBar());
     });
+    var iconpath = 'img/niu.jpg';
+    var staus = "${customer.staus}";
+    if(1 == staus){
+        iconpath='img/zhan.gif';
+    }
+    if(2 == staus){
+        iconpath='img/eat.png';
+    }
+    if(3 == staus){
+        iconpath='img/pa.gif';
+    }
     var icon = new AMap.Icon({
-        image: 'img/niu.jpg',//24px*24px
+        image: iconpath,//24px*24px
         //icon可缺省，缺省时为默认的蓝色水滴图标，
         size: new AMap.Size(30, 30)
     });
@@ -36,7 +47,7 @@
         content.push('<h6>名称：<small>${customer.name}</small></h6>');
         content.push('<h6>规模：<small>${customer.scale}</small></h6>');
         content.push('<h6>库存：<small>${customer.left}</small></h6>');
-        content.push('<h6>状态：<small>${customer.staus}</small></h6>');
+        content.push('<h6>状态：<small>${customer.stausdes}</small></h6>');
         content.push('<h5><a href="customerinfo.do?number=${customer.cid}">查看详情</a></h5>');
         marker.content=content.join("<br/>");
         marker.on('click',markerClick);

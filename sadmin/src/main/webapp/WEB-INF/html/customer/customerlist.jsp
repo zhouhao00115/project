@@ -43,6 +43,7 @@
             <th>牧场规模</th>
             <th>月使用量</th>
             <th>剩余库存</th>
+            <th>库存状态</th>
             <th>数据员</th>
             <th>数据员电话</th>
             <th>备注</th>
@@ -51,7 +52,19 @@
         </thead>
         <tbody>
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
-            <tr>
+            <tr
+                <c:if test="${'0'eq customer.staus}">
+                    style="color:#0d0c22"
+                </c:if>
+                <c:if test="${'1'eq customer.staus}">
+                    style="color:green"
+                </c:if>
+                <c:if test="${'2'eq customer.staus}">
+                    style="color:black"
+                </c:if>
+                <c:if test="${'3'eq customer.staus}">
+                    style="color:red"
+                </c:if>>
                 <td class="center" id="id${i.index}">${customer.cid}</td>
                 <td class="center" id="name${i.index}">
                     <a href="customerinfo.do?number=${customer.cid}" class="btn btn-small"
@@ -62,10 +75,15 @@
                 <td class="center" id="scale${i.index}">${customer.scale}</td>
                 <td class="center" id="used${i.index}">${customer.used}</td>
                 <td class="center" id="left${i.index}">${customer.left}</td>
+                <td class="center" id="staus${i.index}">${customer.stausdes}</td>
                 <td class="center" id="dataUser${i.index}">${customer.sname}</td>
                 <td class="center" id="dataUserPhone${i.index}">${customer.sphone}</td>
                 <td class="center" id="remark${i.index}">${customer.remarks}</td>
-                <td class="center"><h5><small><a href="customerinfo.do?number=${customer.cid}">查看</a></small></h5></td>
+                <td class="center">
+                    <h5>
+                        <small><a href="customerinfo.do?number=${customer.cid}">查看</a></small>
+                    </h5>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -84,9 +102,9 @@
         <li><a href="customer.do?start=${dto.end}&rows=${dto.rows}">尾页</a></li>
     </ul>
     <p class="text-right">
-        <ul class="pagination pagination-sm">
-            <li></li>
-        </ul>
+    <ul class="pagination pagination-sm">
+        <li></li>
+    </ul>
     </p>
 </div>
 <div id="container" style="width:99%; height:500px"></div>
@@ -101,32 +119,47 @@
         map.plugin(["AMap.ToolBar"], function () {
             map.addControl(new AMap.ToolBar());
         });
-        var icon = new AMap.Icon({
-            image: 'img/niu.jpg',//24px*24px
-            //icon可缺省，缺省时为默认的蓝色水滴图标，
-            size: new AMap.Size(30, 30)
-        });
-        var infoWindow = new AMap.InfoWindow({offset:new AMap.Pixel(0,-30)});
+        var infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
             var position = "${customer.longitude}" + "," + "${customer.latitude}";
+            var iconpath = 'img/niu.jpg';
+            var sizegit = '';
+            var staus = new AMap.Size(30, 30);
+            if(1 == staus){
+                iconpath='img/zhan.gif';
+                var staus = new AMap.Size(30, 30);
+            }
+            if(2 == staus){
+                iconpath='img/eat.png';
+                var staus = new AMap.Size(30, 30);
+            }
+            if(3 == staus){
+                iconpath='img/pa.gif';
+                var staus = new AMap.Size(30, 30);
+            }
+            var icon = new AMap.Icon({
+                image: iconpath,//24px*24px
+                //icon可缺省，缺省时为默认的蓝色水滴图标，
+                size: new AMap.Size(30, 30)
+            });
             marker = new AMap.Marker({
                 icon: icon,
                 position: position.split(","),
                 offset: new AMap.Pixel(-12, -12),
                 title: '${customer.cid}--${customer.name}',
-                map:map
+                map: map
             });
             var content = [];
             content.push('<h6>编号：<small>${customer.cid}</small></h6>');
             content.push('<h6>名称：<small>${customer.name}</small></h6>');
             content.push('<h6>规模：<small>${customer.scale}</small></h6>');
             content.push('<h6>库存：<small>${customer.left}</small></h6>');
-            content.push('<h6>状态：<small>${customer.staus}</small></h6>');
+            content.push('<h6>状态：<small>${customer.stausdes}</small></h6>');
             content.push('<h5><a href="customerinfo.do?number=${customer.cid}">查看详情</a></h5>');
-            marker.content=content.join("<br/>");
-            marker.on('click',markerClick);
+            marker.content = content.join("<br/>");
+            marker.on('click', markerClick);
         </c:forEach>
-        function markerClick(e){
+        function markerClick(e) {
             infoWindow.setContent(e.target.content);
             infoWindow.open(map, e.target.getPosition());
         }

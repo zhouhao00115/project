@@ -1,5 +1,6 @@
 package com.zhaopin.core.controller;
 
+import com.zhaopin.core.conf.LocalSettings;
 import com.zhaopin.core.dto.CustomerDto;
 import com.zhaopin.core.dto.customer.CustomerView;
 import com.zhaopin.core.model.CustomerModel;

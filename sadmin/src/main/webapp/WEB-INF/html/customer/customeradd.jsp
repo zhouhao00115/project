@@ -111,7 +111,11 @@
                 <%--<input id="staffid" name="staffid" type="text" class="form-control" placeholder="数据员" value="${dto.staffid}">--%>
                 <select class="form-control" id="staffid" name="staffid">
                     <c:forEach items="${datauser}" var="data" varStatus="i">
-                        <option value="${data.staffid}">${data.staffid}-${data.sname}</option>
+                        <option value="${data.staffid}"
+                            <c:if test="${data.staffid eq dto.staffid}">
+                                selected
+                            </c:if>
+                        >${data.staffid}-${data.sname}</option>
                     </c:forEach>
                 </select>
             </td>
