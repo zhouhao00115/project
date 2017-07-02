@@ -17,25 +17,29 @@
     map.plugin(["AMap.ToolBar"], function () {
         map.addControl(new AMap.ToolBar());
     });
-    var iconpath = 'img/niu.jpg';
-    var staus = "${customer.staus}";
-    if(1 == staus){
-        iconpath='img/zhan.gif';
-    }
-    if(2 == staus){
-        iconpath='img/eat.png';
-    }
-    if(3 == staus){
-        iconpath='img/pa.gif';
-    }
-    var icon = new AMap.Icon({
-        image: iconpath,//24px*24px
-        //icon可缺省，缺省时为默认的蓝色水滴图标，
-        size: new AMap.Size(30, 30)
-    });
     var infoWindow = new AMap.InfoWindow({offset:new AMap.Pixel(0,-30)});
     <c:forEach items="${list}" var="customer" varStatus="i">
         var positionlens = "${customer.longitude}" + "," + "${customer.latitude}";
+        var iconpath = 'img/niu.jpg';
+        var sizegit = new AMap.Size(30, 30);
+        var staus = "${customer.staus}";
+        if(1 == staus){
+            iconpath='img/zhan.gif';
+            sizegit = new AMap.Size(32, 48);
+        }
+        if(2 == staus){
+            iconpath='img/eat.jpg';
+            sizegit = new AMap.Size(36, 27);
+        }
+        if(3 == staus){
+            iconpath='img/pa.gif';
+            sizegit = new AMap.Size(50, 25);
+        }
+        var icon = new AMap.Icon({
+            image: iconpath,//24px*24px
+            //icon可缺省，缺省时为默认的蓝色水滴图标，
+            size: sizegit
+        });
         var marker=new AMap.Marker({
             icon: icon,
             position: positionlens.split(","),
