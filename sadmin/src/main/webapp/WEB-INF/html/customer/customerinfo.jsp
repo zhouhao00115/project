@@ -10,7 +10,7 @@
         <thead>
         <tr>
             <th colspan="2">
-                <li class="btn"><a href="customer.do">返回</a></li>
+                <li class="btn"><a href="customer.do">列表页</a></li>
             </th>
             <th>
                 <c:if test="${'1' eq sessionScope.power}">

@@ -94,6 +94,7 @@
 <script>
     function init() {
         var map = new AMap.Map('container', {
+            resizeEnable: true,
             center: [115.562084, 38.016749],
             zoom: 9
         });
@@ -105,16 +106,30 @@
             //icon可缺省，缺省时为默认的蓝色水滴图标，
             size: new AMap.Size(30, 30)
         });
+        var infoWindow = new AMap.InfoWindow({offset:new AMap.Pixel(0,-30)});
         <c:forEach items="${dto.list}" var="customer" varStatus="i">
             var position = "${customer.longitude}" + "," + "${customer.latitude}";
             marker = new AMap.Marker({
                 icon: icon,
                 position: position.split(","),
                 offset: new AMap.Pixel(-12, -12),
-                title: '${customer.cid}--${customer.name}'
+                title: '${customer.cid}--${customer.name}',
+                map:map
             });
-            marker.setMap(map);
+            var content = [];
+            content.push('<h6>编号：<small>${customer.cid}</small></h6>');
+            content.push('<h6>名称：<small>${customer.name}</small></h6>');
+            content.push('<h6>规模：<small>${customer.scale}</small></h6>');
+            content.push('<h6>库存：<small>${customer.left}</small></h6>');
+            content.push('<h6>状态：<small>${customer.staus}</small></h6>');
+            content.push('<h5><a href="customerinfo.do?number=${customer.cid}">查看详情</a></h5>');
+            marker.content=content.join("<br/>");
+            marker.on('click',markerClick);
         </c:forEach>
+        function markerClick(e){
+            infoWindow.setContent(e.target.content);
+            infoWindow.open(map, e.target.getPosition());
+        }
+        map.setFitView();
     }
-
 </script>

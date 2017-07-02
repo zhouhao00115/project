@@ -15,6 +15,8 @@ public class CustomerModel {
     private String scale;
     private int used;
     private int left;
+    //库存状态
+    private int staus;
     private String road;
     private int price;
     private double longitude;
@@ -177,6 +179,13 @@ public class CustomerModel {
         this.sphone = sphone;
     }
 
+    public int getStaus() {
+        return staus;
+    }
+
+    public void setStaus(int staus) {
+        this.staus = staus;
+    }
     //    private String id;
 //    private String name;
 //    private String city;
