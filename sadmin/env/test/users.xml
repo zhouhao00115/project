@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<users>
+    <user>
+        <name>admin</name>
+        <password>admin</password>
+    </user>
+
+    <user>
+        <name>guangzhi.wang</name>
+        <password>123456</password>
+    </user>
+    <user>
+        <name>support</name>
+        <password>123456</password>
+    </user>
+</users>
