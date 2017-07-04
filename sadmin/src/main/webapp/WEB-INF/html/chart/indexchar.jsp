@@ -6,7 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <meta charset="utf-8">
-<script src="<%=basePath %>js/echarts.js"></script>
+<script src="<%=basePath %>js/echarts.min.js"></script>
 <div id="chart" style="width: 80% ;height:400px;"></div>
 <div id="chart2" style="width: 80% ;height:400px;"></div>
 <script type="text/javascript">

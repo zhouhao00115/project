@@ -2,7 +2,7 @@
 APP_HOME="/data/services/report"
 CLASSPATH=$APP_HOME/bin
 
-export PATH="/usr/java/jdk1.7.0_04/bin"
+export PATH="/usr/java/jdk1.8.0_131/bin"
 export LC_ALL=zh_CN.GBK
 MAIN_FUNCTION="com.zhaopin.core.task.ReportTask"
 echo $1
