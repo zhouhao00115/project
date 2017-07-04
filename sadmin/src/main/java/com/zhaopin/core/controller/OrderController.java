@@ -14,7 +14,6 @@ import com.zhaopin.core.service.CustomerService;
 import com.zhaopin.core.service.DataUserService;
 import com.zhaopin.core.service.OrderService;
 import com.zhaopin.core.service.TrackService;
-import com.zhaopin.core.util.DateUtil;
 import com.zhaopin.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -309,7 +308,6 @@ public class OrderController {
             orderAddInfoDto.setCustomers(customerService.getList(new CustomerView(0, 10000)));
             orderAddInfoDto.setTracks(trackService.query(new TrackView(0, 10000)));
             orderAddInfoDto.setDataUser(dataUserService.query(new DataUserView(0, 10000)));
-            model.setCreatetime(DateUtil.convert2String(new Date(),DateUtil.formatDate_01));
             model.setOid(0);
             OrderModel orderModel = service.addOrder(model);
             if(orderModel.getOid()>0){

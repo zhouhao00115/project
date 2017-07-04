@@ -15,8 +15,8 @@
 --create table staff(staffid int primary key,sname varchar(50),sphone varchar(20),gender int,remarks varchar(200));
 --insert into staff(staffid,sname,sphone,gender,remarks) values (1,'王五','13712345678','1','备注');
 --order：订单表
---drop table orders;
---create table orders(oid int primary key ,cid varchar(50) ,tid int ,staffid int,volume int,price double,total int,createtime varchar(50),remarks varchar(200));
+--
+--create table orders(oid int primary key ,cid varchar(50) ,tid int ,staffid int,volume int,price double,total int,createtime timestamp,remarks varchar(200));
 --insert into orders (oid,cid,tid,staffid,volume,price,total,createtime,remarks) values (1,'HS001',1,1,10,21.5,215,'2017-06-22 21:06:05','');
 --user:用户登陆信息表
 --drop table user;
@@ -36,7 +36,7 @@
 --id:登陆用户id，username：用户名，password：密码，power：权限 1、超级管理员，2、普通管理员，3、只读权限
 --select cid, name, city, address, cname, cphone, naicity, naiaddress, scale, used, left, road, longitude, latitude, t1.staffid ,remarks  from customer as t1,
 --(select * from staff) as t2 where t1.staffid=t2.staffid order by cid desc limit 1 offset 0;
-delete from truck where tid =0
+--delete from truck where tid =0
 --delete from orders where oid=0
 --delete from staff where staffid=0
 --delete from customer where cid=HS0000
