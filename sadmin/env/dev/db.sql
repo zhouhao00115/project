@@ -15,13 +15,17 @@
 --create table staff(staffid int primary key,sname varchar(50),sphone varchar(20),gender int,remarks varchar(200));
 --insert into staff(staffid,sname,sphone,gender,remarks) values (1,'王五','13712345678','1','备注');
 --order：订单表
---
+--drop table orders;
 --create table orders(oid int primary key ,cid varchar(50) ,tid int ,staffid int,volume int,price double,total int,createtime timestamp,remarks varchar(200));
 --insert into orders (oid,cid,tid,staffid,volume,price,total,createtime,remarks) values (1,'HS001',1,1,10,21.5,215,'2017-06-22 21:06:05','');
 --user:用户登陆信息表
 --drop table user;
 --create table user(id int primary key,username varchar(50),password varchar(50),power int);
 --insert into user(id,username,password,power) values (1,'admin','admin',1);
+--repoet:日常报表
+--drop table report;
+--create table report (rid int primary key,cid varchar,createdate date,total int,remark VARCHAR);
+--insert into report (rid,cid,createdate,total,remark) values (1,'HS00001',date('now'),15,'无');
 --数据库字段对照表
 --customer：牧场信息表
 --cid牧场id HS开头+000编号,name:牧场简称，city：牧场所在行政区划，address：牧场地址，cname：厂长姓名，cphone：厂长电话，naicity：交奶地的行政区划
