@@ -12,7 +12,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhou.hao on 2017/6/30.
@@ -134,5 +136,13 @@ public class OrderDaoImpl implements OrderDao {
             session.close();
         }
         return orderModel;
+    }
+
+    @Override
+    public Map<String, Integer>  countOrderByCustomerAndDay(String day) {
+        System.out.println("数据汇总功能开始");
+        Map<String, Integer> map = new HashMap<>();
+        map.put("HS00001", 1);
+        return map;
     }
 }

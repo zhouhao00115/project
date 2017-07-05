@@ -4,22 +4,22 @@ package com.zhaopin.core.dto.report;
  * Created by zhou.hao on 2017/7/4.
  */
 public class Code {
-    private String key;
-    private String valuse;
+    private String cid;
+    private int count;
 
-    public String getKey() {
-        return key;
+    public String getCid() {
+        return cid;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
-    public String getValuse() {
-        return valuse;
+    public int getCount() {
+        return count;
     }
 
-    public void setValuse(String valuse) {
-        this.valuse = valuse;
+    public void setCount(int count) {
+        this.count = count;
     }
 }
