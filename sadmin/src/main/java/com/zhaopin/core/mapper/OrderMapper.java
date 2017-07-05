@@ -3,6 +3,7 @@ package com.zhaopin.core.mapper;
 import com.zhaopin.core.dto.order.OrderView;
 import com.zhaopin.core.mapper.provider.OrderProvider;
 import com.zhaopin.core.model.OrderModel;
+import com.zhaopin.core.model.OrderReport;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -40,4 +41,7 @@ public interface OrderMapper {
 
     @Update("update orders set cid=#{customerModel.cid},tid=#{trackModel.tid},staffid=#{dataUserModel.staffid},volume=#{volume},price=#{price},total=#{total},remarks=#{remarks} where oid=#{oid}")
     int updateOrders(OrderModel model);
+
+    @Select("select sum(volume) as count,cid from orders where createtime>=#{datetime} group by cid order by cid asc;")
+    List<OrderReport> countOrder(String datetime);
 }

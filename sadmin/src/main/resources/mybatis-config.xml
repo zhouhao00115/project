@@ -37,5 +37,6 @@
         <mapper class="com.zhaopin.core.mapper.DataUserMapper"/>
         <mapper class="com.zhaopin.core.mapper.TrackMapper"/>
         <mapper class="com.zhaopin.core.mapper.OrderMapper"/>
+        <mapper class="com.zhaopin.core.mapper.ReportMapper"/>
     </mappers>
 </configuration>
