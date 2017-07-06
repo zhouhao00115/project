@@ -7,12 +7,18 @@
 %>
 <meta charset="utf-8">
 <script src="<%=basePath %>js/echarts.min.js"></script>
+
 <div id="chart" style="width: 80% ;height:400px;"></div>
 <div id="chart2" style="width: 80% ;height:400px;"></div>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('chart'));
     var myChart2 = echarts.init(document.getElementById('chart2'));
+    var aa = new Array();
+    <c:forEach items="${dto}" var="data" varStatus="i">
+        aa.push("${data.cid}");
+    </c:forEach>
+    alert(aa.join(","));
     // 指定图表的配置项和数据
     option = {
         title: {
