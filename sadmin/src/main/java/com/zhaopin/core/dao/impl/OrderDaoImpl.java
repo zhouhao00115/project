@@ -7,11 +7,13 @@ import com.zhaopin.core.mapper.CustomerMapper;
 import com.zhaopin.core.mapper.OrderMapper;
 import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.model.OrderModel;
+import com.zhaopin.core.model.OrderReport;
 import com.zhaopin.core.util.StringUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,10 +141,19 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Map<String, Integer>  countOrderByCustomerAndDay(String day) {
-        System.out.println("数据汇总功能开始");
-        Map<String, Integer> map = new HashMap<>();
-        map.put("HS00001", 1);
-        return map;
+    public List<OrderReport>  countOrderByCustomerAndDay(String day) {
+        System.out.println(day);
+        SqlSession session = sqlSessionFactory.openSession();
+        List<OrderReport> orderReports = null;
+        try {
+            OrderMapper mapper = session.getMapper(OrderMapper.class);
+            orderReports = mapper.countOrder(day);
+        } catch (Exception e) {
+            e.printStackTrace();
+            orderReports = new ArrayList<>();
+        } finally {
+            session.close();
+        }
+        return orderReports;
     }
 }

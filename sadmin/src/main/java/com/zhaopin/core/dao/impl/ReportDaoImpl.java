@@ -25,6 +25,14 @@ public class ReportDaoImpl implements ReportDao {
         int number = 0;
         try {
             ReportMapper mapper = session.getMapper(ReportMapper.class);
+            int count = mapper.count();
+            int id = 0;
+            if (count > 0) {
+                id = mapper.getLastId();
+            } else {
+                id = 0;
+            }
+            model.setRid(id + 1);
             number = mapper.addReportData(model);
             if (number > 0) {
                 session.commit();

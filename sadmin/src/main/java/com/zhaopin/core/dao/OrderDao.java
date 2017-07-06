@@ -2,9 +2,9 @@ package com.zhaopin.core.dao;
 
 import com.zhaopin.core.dto.order.OrderView;
 import com.zhaopin.core.model.OrderModel;
+import com.zhaopin.core.model.OrderReport;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zhou.hao on 2017/6/30.
@@ -26,5 +26,5 @@ public interface OrderDao {
      * @param day
      * @return
      */
-    public Map<String, Integer> countOrderByCustomerAndDay(String day);
+    public List<OrderReport> countOrderByCustomerAndDay(String day);
 }
