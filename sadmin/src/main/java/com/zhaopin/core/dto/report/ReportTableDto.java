@@ -1,5 +1,6 @@
 package com.zhaopin.core.dto.report;
 
+import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.model.ReportModel;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class ReportTableDto {
     private String cid;
     private String cname;
+    private CustomerModel customerModel;
     private List<ReportModel> models;
 
     public String getCid() {
@@ -33,5 +35,13 @@ public class ReportTableDto {
 
     public void setModels(List<ReportModel> models) {
         this.models = models;
+    }
+
+    public CustomerModel getCustomerModel() {
+        return customerModel;
+    }
+
+    public void setCustomerModel(CustomerModel customerModel) {
+        this.customerModel = customerModel;
     }
 }

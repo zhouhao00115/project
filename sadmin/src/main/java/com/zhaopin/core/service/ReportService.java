@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface ReportService {
     public List<ReportTableDto> reportChart(Date startDate , Date endDate);
+    public List<ReportTableDto> reportChart(Date startDate);
 }

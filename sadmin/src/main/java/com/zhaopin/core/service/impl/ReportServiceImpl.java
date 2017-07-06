@@ -1,9 +1,12 @@
 package com.zhaopin.core.service.impl;
 
+import com.zhaopin.core.dao.CustomerDao;
 import com.zhaopin.core.dao.ReportDao;
 import com.zhaopin.core.dto.report.ReportTableDto;
+import com.zhaopin.core.model.CustomerModel;
 import com.zhaopin.core.model.ReportModel;
 import com.zhaopin.core.model.ReportTimeModel;
+import com.zhaopin.core.service.CustomerService;
 import com.zhaopin.core.service.ReportService;
 import com.zhaopin.core.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,13 @@ public class ReportServiceImpl implements ReportService, Comparator {
 
     @Autowired
     private ReportDao reportDao;
+    @Autowired
+    private CustomerDao customerDao;
+
+    @Override
+    public List<ReportTableDto> reportChart(Date startDate) {
+        return reportChart(startDate, startDate);
+    }
 
     @Override
     public List<ReportTableDto> reportChart(Date startDate, Date endDate) {
@@ -55,11 +65,13 @@ public class ReportServiceImpl implements ReportService, Comparator {
             ReportTableDto tableDto = new ReportTableDto();
             tableDto.setCid(key);
             tableDto.setModels(map.get(key));
+            tableDto.setCustomerModel(customerDao.getCustomerById(key));
             result.add(tableDto);
         }
-        Collections.sort(result,ReportServiceImpl.this);
+        Collections.sort(result, ReportServiceImpl.this);
         return result;
     }
+
 
     @Override
     public int compare(Object o1, Object o2) {
