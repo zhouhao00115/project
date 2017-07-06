@@ -15,7 +15,7 @@ import java.util.*;
  * Created by zhou.hao on 2017/7/6.
  */
 @Service("ReportService")
-public class ReportServiceImpl implements ReportService {
+public class ReportServiceImpl implements ReportService, Comparator {
 
     @Autowired
     private ReportDao reportDao;
@@ -57,6 +57,24 @@ public class ReportServiceImpl implements ReportService {
             tableDto.setModels(map.get(key));
             result.add(tableDto);
         }
+        Collections.sort(result,ReportServiceImpl.this);
         return result;
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        ReportTableDto dto1 = (ReportTableDto) o1;
+        ReportTableDto dto2 = (ReportTableDto) o2;
+        try {
+            int a = Integer.parseInt(dto1.getCid().replace("HS", ""));
+            int b = Integer.parseInt(dto2.getCid().replace("HS", ""));
+            if (a < b) {
+                return 1;
+            }
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
