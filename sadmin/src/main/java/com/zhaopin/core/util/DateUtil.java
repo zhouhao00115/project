@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
  */
 public class DateUtil {
     public static final String formatDate_01 = "yyyy-MM-dd HH:mm:ss";
-
+    public static final String getFormatDate_02 = "yyyy-MM-dd";
     /**
      * 把日期字符串格式化成日期类型
      *
