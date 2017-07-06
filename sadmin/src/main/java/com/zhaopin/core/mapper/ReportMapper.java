@@ -1,8 +1,11 @@
 package com.zhaopin.core.mapper;
 
 import com.zhaopin.core.model.ReportModel;
+import com.zhaopin.core.model.ReportTimeModel;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * Created by zhou.hao on 2017/7/5.
@@ -16,4 +19,7 @@ public interface ReportMapper {
 
     @Select("select count(*) from report")
     int count();
+
+    @Select("select rid,cid,createdate,total,remark from report where createdate>#{startDay} AND createdate<=#{endDay}")
+    List<ReportModel> query(ReportTimeModel model);
 }
