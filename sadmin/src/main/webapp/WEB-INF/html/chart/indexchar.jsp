@@ -68,7 +68,7 @@
     }
     option2 = {
         title: {
-            text: '各牧场发货量占比',
+            text: datelist[0]+'到'+datelist[datelist.length-1]+'各牧场发货量占比',
             subtext: '统计',
             x: 'center'
         },
