@@ -14,8 +14,8 @@
                     class="hidden-tablet"> 数据员管理</span></a></li>
             <li><a class="ajax-link" href="order.do"><i class="icon-briefcase"></i><span
                     class="hidden-tablet"> 货运订单</span></a></li>
-            <%--<li><a class="ajax-link" href="charts.do"><i class="icon-signal"></i><span--%>
-                    <%--class="hidden-tablet"> 报表系统</span></a></li>--%>
+            <li><a class="ajax-link" href="charts.do"><i class="icon-signal"></i><span
+                    class="hidden-tablet"> 报表系统</span></a></li>
             <c:if test="${'admin' eq sessionScope.username}">
                 <li><a class="ajax-link" href="admin.do"><i class="icon-wrench"></i><span
                         class="hidden-tablet"> 权限管理</span></a></li>
