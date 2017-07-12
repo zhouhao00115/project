@@ -3,6 +3,7 @@ package com.zhaopin.core.controller;
 import com.zhaopin.core.dto.AdminDto;
 import com.zhaopin.core.dto.admin.AdminView;
 import com.zhaopin.core.model.AdminModel;
+import com.zhaopin.core.runtime.LogManager;
 import com.zhaopin.core.service.AdminService;
 import com.zhaopin.core.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,7 @@ public class AdminController {
             start = Integer.parseInt(numberstart);
             rows = Integer.parseInt(numberrows);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.printf("输入的行数不为整数，报错");
+            LogManager.error(AdminController.class, "输入的行数不为整数，报错", e);
             start = 0;
             rows = 10;
         }
@@ -66,7 +66,7 @@ public class AdminController {
             try {
                 rows = Integer.parseInt(cookierows);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogManager.error(AdminController.class, "cookie行数取值异常", e);
             }
         }
         AdminDto dto = new AdminDto();
@@ -110,9 +110,9 @@ public class AdminController {
             try {
                 number = Integer.parseInt(id);
             } catch (Exception e) {
-                e.printStackTrace();
+                LogManager.error(AdminController.class, "id异常", e);
             }
-            if(number == (int) session.getAttribute("id")){
+            if (number == (int) session.getAttribute("id")) {
                 mv.addObject("add", 3);
                 //标记返回的页面为列表页
                 mv.addObject("dto", adminService.getAdminById((int) session.getAttribute("id")));
@@ -221,7 +221,7 @@ public class AdminController {
                     mv.addObject("info", "修改成功");
                     return mv;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LogManager.error(AdminController.class, "power异常", e);
                 }
                 mv.addObject("dto", adminModel);
                 mv.addObject("info", "修改失败");
