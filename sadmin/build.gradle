@@ -4,8 +4,8 @@ ext{
     slf4j='1.7.21'
     log4jVersion = '1.2.17'
     jacksonVersion = '1.9.13'
+    mysqlVersion = '5.1.21'
     sqlite = '3.16.1'
-    mysqlVersion = '5.1.34'
     jexcelapi = '2.6.10'
     mailVersion = '1.4.7'
     myBatisVersion = '3.2.2'
@@ -21,15 +21,18 @@ ext{
     pinyin4j = '2.5.0'
     guavaVersion = '15.0'
     redisVersion = '2.8.1'
+    httpVersion = '4.5.2'
 }
 
 dependencies {
+    compile"org.apache.httpcomponents:httpclient:$httpVersion"
     compile "log4j:log4j:$log4jVersion"
     compile "org.slf4j:slf4j-api:$slf4j"
     compile "org.slf4j:slf4j-log4j12:$slf4j"
     compile "org.codehaus.jackson:jackson-core-asl:$jacksonVersion"
     compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
     compile "org.xerial:sqlite-jdbc:$sqlite"
+    compile "mysql:mysql-connector-java:$mysqlVersion"
     compile "net.sourceforge.jexcelapi:jxl:$jexcelapi"
     compile "javax.mail:mail:$mailVersion"
     compile "org.mybatis:mybatis:$myBatisVersion"

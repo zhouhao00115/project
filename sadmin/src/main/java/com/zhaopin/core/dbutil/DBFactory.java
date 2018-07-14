@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class DBFactory {
     private static SqlSessionFactory sqlSessionFactory = null;
-
+    private static SqlSessionFactory mysqlSqlSessionFactory = null;
     public static SqlSessionFactory getSqlSessionFactory() {
         if (null == sqlSessionFactory) {
             synchronized (DBFactory.class) {
@@ -26,6 +26,23 @@ public class DBFactory {
                         e.printStackTrace();
                     }
                     sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "sqlite");
+                }
+            }
+        }
+        return sqlSessionFactory;
+    }
+
+    public static SqlSessionFactory getMysqlSqlSessionFactory() {
+        if (null == sqlSessionFactory) {
+            synchronized (DBFactory.class) {
+                if(null == sqlSessionFactory){
+                    Reader reader = null;
+                    try {
+                        reader = Resources.getResourceAsReader("mybatis-config.xml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "mysql");
                 }
             }
         }

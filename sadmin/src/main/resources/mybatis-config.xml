@@ -18,7 +18,7 @@
         <setting name="localCacheScope" value="SESSION"/>
         <setting name="jdbcTypeForNull" value="OTHER"/>
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
     </settings>
     <environments default="sqlite">
         <environment id="sqlite">
@@ -30,6 +30,15 @@
                 <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
+        <environment id="mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql.jdbc.driverClass}"/>
+                <property name="url" value="${mysql.jdbc.jdbcUrl}"/>
+                <property name="username" value="${mysql.jdbc.user}"/>
+                <property name="password" value="${mysql.jdbc.password}"/>
+            </dataSource>
+        </environment>
     </environments>
     <mappers>
         <mapper class="com.zhaopin.core.mapper.CustomerMapper"/>
@@ -38,5 +47,6 @@
         <mapper class="com.zhaopin.core.mapper.TrackMapper"/>
         <mapper class="com.zhaopin.core.mapper.OrderMapper"/>
         <mapper class="com.zhaopin.core.mapper.ReportMapper"/>
+        <mapper class="com.zhaopin.core.mapper.MysqlMapper"/>
     </mappers>
 </configuration>
