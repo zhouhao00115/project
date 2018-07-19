@@ -52,8 +52,10 @@ public class RamanDaoImpl implements RamanDao {
         try {
             MysqlMapper mapper = session.getMapper(MysqlMapper.class);
             number = mapper.updateRamanData(model);
+            session.commit();
         } catch (Exception e) {
             e.printStackTrace();
+            session.commit();
         } finally {
             session.close();
         }

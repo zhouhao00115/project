@@ -2,7 +2,7 @@ package com.zhaopin.core.model.msqlModel;
 
 public class RamanUpdate {
     private String deviceId;
-    private String testId;
+    private int testId;
     private String serverId;
     private String serverName;
     private String localId;
@@ -17,11 +17,11 @@ public class RamanUpdate {
         this.deviceId = deviceId;
     }
 
-    public String getTestId() {
+    public int getTestId() {
         return testId;
     }
 
-    public void setTestId(String testId) {
+    public void setTestId(int testId) {
         this.testId = testId;
     }
 
