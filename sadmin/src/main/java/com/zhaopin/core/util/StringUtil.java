@@ -17,6 +17,10 @@ public class StringUtil {
         return null == string || "".equals(string.trim());
     }
 
+    public static boolean isNull(String string) {
+        return null == string;
+    }
+
     public static String frontCompWithZore(int sourceDate, int formatLength) {
         return String.format("%0" + formatLength + "d", sourceDate);
     }
@@ -480,7 +484,7 @@ public class StringUtil {
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         c.add(Calendar.HOUR_OF_DAY, -8);
-        dt=c.getTime();
+        dt = c.getTime();
         return dt;
     }
 
